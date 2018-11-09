@@ -12,7 +12,23 @@
 		A83E80FF2196121A00E09E55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A83E80F72196121A00E09E55 /* Assets.xcassets */; };
 		A83E81002196121A00E09E55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A83E80F82196121A00E09E55 /* LaunchScreen.storyboard */; };
 		A83E81012196121A00E09E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A83E80FA2196121A00E09E55 /* Main.storyboard */; };
+		A83E81062196153800E09E55 /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83E81042196152E00E09E55 /* VKSdkFramework.framework */; };
+		A83E81072196153800E09E55 /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A83E81042196152E00E09E55 /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A83E81082196153800E09E55 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A83E81072196153800E09E55 /* VKSdkFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A83E80DE219611C000E09E55 /* VKChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		A83E80F92196121A00E09E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A83E80FB2196121A00E09E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A83E80FC2196121A00E09E55 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A83E81042196152E00E09E55 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VKSdkFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A83E81062196153800E09E55 /* VKSdkFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 		A83E80D5219611BF00E09E55 = {
 			isa = PBXGroup;
 			children = (
+				A83E81032196152E00E09E55 /* Frameworks */,
 				A83E80F62196121A00E09E55 /* Resources */,
 				A83E80F32196121A00E09E55 /* Source */,
 				A83E80DF219611C000E09E55 /* Products */,
@@ -72,6 +91,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A83E81032196152E00E09E55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A83E81042196152E00E09E55 /* VKSdkFramework.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,6 +109,7 @@
 				A83E80DA219611C000E09E55 /* Sources */,
 				A83E80DB219611C000E09E55 /* Frameworks */,
 				A83E80DC219611C000E09E55 /* Resources */,
+				A83E81082196153800E09E55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -292,7 +320,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +343,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
