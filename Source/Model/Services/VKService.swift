@@ -25,6 +25,7 @@ enum VKServiceError: Error {
 
 /// Класс-модель, обеспечивающий работу с API Vkontakte
 final class VKService: NSObject {
+	private(set) var userId: String?
 	private let appID = "6747106"
 	private let scope = ["wall", "friends"]
 	private let apiString = "https://api.vk.com/method/"
@@ -69,7 +70,6 @@ final class VKService: NSObject {
 			return
 		}
 		let request = URLRequest(url: url)
-		print(url)
 		URLSession.shared.dataTask(with: request) { (data, response, error) in
 			if let httpResponse = response as? HTTPURLResponse {
 				if let error = error {
@@ -104,6 +104,7 @@ extension VKService: VKSdkDelegate {
 		// Давайте на следующий конкурс сделаем мобильный SDK для работы с VK API, ориентированный на Swift? :-)
 		if newToken != nil {
 			accessToken = newToken.accessToken
+			userId = newToken.userId
 		}
 	}
 	
@@ -116,7 +117,10 @@ extension VKService: VKSdkDelegate {
 	}
 	
 	func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-		accessToken = result.token.accessToken
+		if result.token != nil {
+			accessToken = result.token.accessToken
+			userId = result.token.userId
+		}
 	}
 	
 	func vkSdkUserAuthorizationFailed() {

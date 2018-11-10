@@ -12,7 +12,6 @@ enum NewsfeedServiceError: Error {
 	case modelParsing
 	case noPostDate
 	case noPostsResponse
-	case noUserId
 }
 
 /// Шаблон репозиторий или CRUD-интерфейс по работе с новостной лентой, возращает массив объектов Post
@@ -60,7 +59,7 @@ private extension NewsfeedService {
 		var profiles = [Int: Profile]()
 		if let profilesJson = response["profiles"] as? [[String: Any]] {
 			for item in profilesJson {
-				let profileResponse = parseProfile(profileJSON: item)
+				let profileResponse = ProfileParser.parse(profileJSON: item)
 				if let profile = profileResponse.profile, profileResponse.error == nil {
 					profiles[profile.id] = profile
 				}
@@ -105,24 +104,5 @@ private extension NewsfeedService {
 		}
 		post.text = postJson["text"] as? String
 		return (post, nil)
-	}
-	
-	func parseProfile(profileJSON: [String: Any]) -> (profile: Profile?, error: Error?) {
-		guard let userId = profileJSON["id"] as? Int else {
-			return (nil, NewsfeedServiceError.noUserId)
-		}
-		var profile = Profile()
-		profile.id = userId
-		
-		if let firstName = profileJSON["first_name"] as? String {
-			profile.firstName = firstName
-		}
-		if let lastName = profileJSON["last_name"] as? String {
-			profile.lastName = lastName
-		}
-		if let url = profileJSON["photo_100"] as? String {
-			profile.photoUrl = url
-		}
-		return (profile, nil)
 	}
 }

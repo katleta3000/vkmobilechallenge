@@ -12,10 +12,11 @@ import Foundation
 final class ServiceLocator {
 	static let shared = ServiceLocator()
 	let vkService = VKService()
-	let newsfeed: NewsfeedService
+	let newsfeedService: NewsfeedService
+	let userService: UserService
 	
 	private init() {
-		newsfeed = NewsfeedService(vkService: vkService)
-	}
-	
+		newsfeedService = NewsfeedService(vkService: vkService)
+		userService = UserService(vkService: vkService)
+	}	
 }

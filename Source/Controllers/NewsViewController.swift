@@ -9,14 +9,22 @@
 import UIKit
 
 final class NewsViewController: UIViewController {
-	let newsfeedService = ServiceLocator.shared.newsfeed
+	let vkService = ServiceLocator.shared.vkService
+	let newsfeedService = ServiceLocator.shared.newsfeedService
+	let userService = ServiceLocator.shared.userService
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		newsfeedService.get(completion: { (posts, error) in
-			
+			print(posts)
 		})
+		
+		if let userId = vkService.userId {
+			userService.get(userId: userId) { (profile, error) in
+				print(profile)
+			}
+		}
 	}
 }
 
