@@ -10,9 +10,13 @@ import UIKit
 
 final class PostTableCell: UITableViewCell {
 	private weak var containerView: UIView?
+	private weak var bottomView: UIView?
 	weak var avatar: UIImageView?
 	weak var author: UILabel?
 	weak var date: UILabel?
+	weak var likes: UILabel?
+	weak var comments: UILabel?
+	weak var reposts: UILabel?
 	
 	func setup() {
 		backgroundColor = .clear
@@ -22,6 +26,24 @@ final class PostTableCell: UITableViewCell {
 			view.layer.cornerRadius = 10
 			addSubview(view)
 			containerView = view
+		}
+		if bottomView == nil {
+			let view = UIView(frame: CGRect(x: 0, y: containerView!.bounds.size.height - 48, width: containerView!.bounds.size.width, height: 48))
+			view.backgroundColor = .clear
+			containerView!.addSubview(view)
+			bottomView = view
+			
+			let likesImage = UIImageView(frame: CGRect(x: 16, y: 14, width: 24, height: 24))
+			bottomView!.addSubview(likesImage)
+			likesImage.image = UIImage(named: "likes_icon")
+			
+			let commentsImage = UIImageView(frame: CGRect(x: 100, y: 14, width: 24, height: 24))
+			bottomView!.addSubview(commentsImage)
+			commentsImage.image = UIImage(named: "comments_icon")
+			
+			let repostsImage = UIImageView(frame: CGRect(x: 184, y: 14, width: 24, height: 24))
+			bottomView!.addSubview(repostsImage)
+			repostsImage.image = UIImage(named: "reposts_icon")
 		}
 		if avatar == nil {
 			let view = UIImageView(frame: CGRect(x: 12, y: 12, width: 36, height: 36))
@@ -44,6 +66,30 @@ final class PostTableCell: UITableViewCell {
 			view.font = UIFont(name: "SFProText-Regular", size: 12)
 			containerView!.addSubview(view)
 			date = view
+		}
+		if likes == nil {
+			let view = UILabel(frame: CGRect(x: 44, y: 18, width: 55, height: 17))
+			view.backgroundColor = .white
+			view.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
+			view.font = UIFont(name: "SFProText-Medium", size: 14)
+			bottomView!.addSubview(view)
+			likes = view
+		}
+		if comments == nil {
+			let view = UILabel(frame: CGRect(x: 128, y: 18, width: 55, height: 17))
+			view.backgroundColor = .white
+			view.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
+			view.font = UIFont(name: "SFProText-Medium", size: 14)
+			bottomView!.addSubview(view)
+			comments = view
+		}
+		if reposts == nil {
+			let view = UILabel(frame: CGRect(x: 212, y: 18, width: 55, height: 17))
+			view.backgroundColor = .white
+			view.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
+			view.font = UIFont(name: "SFProText-Medium", size: 14)
+			bottomView!.addSubview(view)
+			reposts = view
 		}
 	}
 }

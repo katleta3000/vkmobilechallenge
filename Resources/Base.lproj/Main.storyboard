@@ -120,8 +120,8 @@
                                 <outlet property="delegate" destination="6BF-gB-V0J" id="YcB-Dg-ate"/>
                             </connections>
                         </searchBar>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-pO-VUh">
-                            <rect key="frame" x="328" y="34" width="36" height="36"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-pO-VUh">
+                            <rect key="frame" x="327" y="34" width="36" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="hgv-BI-yYP"/>
                                 <constraint firstAttribute="width" constant="36" id="opt-Nd-PEg"/>

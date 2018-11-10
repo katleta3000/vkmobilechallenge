@@ -13,6 +13,10 @@ struct PostPresentation {
 	let imageUrl: String?
 	let author: String
 	let date: String
+	let likes: String
+	let reposts: String
+	let comments: String
+	let views: String
 
 	init(with post: Post) {
 		
@@ -38,14 +42,14 @@ struct PostPresentation {
 			return formatter.string(from: post.date)
 		}
 		
-		func prepareImage() -> String? {
-			return post.user?.photoUrl
-		}
-		
 		author = prepareAuthor()
 		date = prepareDate()
-		imageUrl = prepareImage()
-		height = 100
+		imageUrl = post.user?.photoUrl
+		likes = "\(post.likes)"
+		reposts = "\(post.reposts)"
+		comments = "\(post.comments)"
+		views = ""
+		height = 120
 	}
 	
 	

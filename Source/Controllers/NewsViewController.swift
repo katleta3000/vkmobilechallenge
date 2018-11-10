@@ -129,7 +129,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 100
+		let post = postData[indexPath.row]
+		return post.height
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,6 +151,9 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 				cell.avatar?.image = image
 			}
 		}
+		cell.likes?.text = post.likes
+		cell.comments?.text = post.comments
+		cell.reposts?.text = post.reposts
 		
 		return cell
 	}
