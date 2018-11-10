@@ -38,8 +38,16 @@ final class NewsViewController: UIViewController {
 			self.view.insertSubview(view, belowSubview: tableView)
 			tableView.backgroundColor = .clear
 		}
+		func setupTopBar() {
+			topBar.layer.masksToBounds = false
+			topBar.layer.shadowOffset = CGSize(width: 0, height: 2)
+			topBar.layer.shadowRadius = 8;
+			topBar.layer.shadowColor = UIColor.black.cgColor
+			topBar.layer.shadowOpacity = 0.1;
+		}
 		super.viewDidLoad()
 		setupBackground()
+		setupTopBar()
 		setupRefreshControl()
 		refreshControl.beginRefreshing()
 		getNewsfeed()
@@ -79,6 +87,12 @@ final class NewsViewController: UIViewController {
 // MARK: table view delegates & data source
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		UIView.animate(withDuration: 0.25) {
+			self.topBar.alpha = scrollView.contentOffset.y > -44 ? 1 : 0
+		}
+	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 100
