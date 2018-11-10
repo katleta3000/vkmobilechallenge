@@ -14,7 +14,7 @@ enum NewsfeedServiceError: Error {
 	case noPostsResponse
 }
 
-/// Шаблон репозиторий или CRUD-интерфейс, который обеспечивает работу с моделями Newsfeed
+/// Шаблон репозиторий или CRUD-интерфейс по работе с новостной лентой, возращает массив объектов Post
 final class NewsfeedService {
 	let vkService: VKService
 	
