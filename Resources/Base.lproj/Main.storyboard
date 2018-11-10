@@ -99,6 +99,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerImageView" destination="1Pu-pO-VUh" id="0VU-zC-d9p"/>
                         <outlet property="headerView" destination="W0y-LN-BNM" id="8QU-qw-DYf"/>
                         <outlet property="searchBar" destination="dh1-xG-DJF" id="X8f-ou-EyQ"/>
                         <outlet property="tableView" destination="Z7q-bd-czk" id="Zgu-NC-Mmi"/>
@@ -119,10 +120,19 @@
                                 <outlet property="delegate" destination="6BF-gB-V0J" id="YcB-Dg-ate"/>
                             </connections>
                         </searchBar>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-pO-VUh">
+                            <rect key="frame" x="328" y="34" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="hgv-BI-yYP"/>
+                                <constraint firstAttribute="width" constant="36" id="opt-Nd-PEg"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="bottom" secondItem="W0y-LN-BNM" secondAttribute="bottom" id="9JC-Ag-u9n"/>
+                        <constraint firstAttribute="trailing" secondItem="1Pu-pO-VUh" secondAttribute="trailing" constant="12" id="RTf-mg-ehB"/>
+                        <constraint firstItem="1Pu-pO-VUh" firstAttribute="centerY" secondItem="dh1-xG-DJF" secondAttribute="centerY" id="dVa-RN-rFw"/>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="trailing" secondItem="W0y-LN-BNM" secondAttribute="trailing" constant="-60" id="lFd-wL-KR9"/>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="leading" secondItem="W0y-LN-BNM" secondAttribute="leading" id="q1j-E8-dkR"/>
                     </constraints>

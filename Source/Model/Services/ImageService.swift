@@ -18,7 +18,7 @@ final class ImageService {
 		session = URLSession(configuration: configuration)
 	}
 
-	func get(urlString: String, completion: @escaping (UIImage?) -> Void) {
+	func get(urlString: String, round: Bool = false, completion: @escaping (UIImage?) -> Void) {
 		guard let url = URL(string: urlString) else {
 			DispatchQueue.main.sync {
 				completion(nil);
@@ -27,7 +27,10 @@ final class ImageService {
 		}
 		session.dataTask(with: url) { (data, response, error) in
 			if let data = data {
-				let image = UIImage(data: data)
+				var image = UIImage(data: data)
+				if round {
+					image = image?.roundedImage
+				}
 				DispatchQueue.main.async {
 					completion(image)
 				}

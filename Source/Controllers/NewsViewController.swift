@@ -17,6 +17,7 @@ final class NewsViewController: UIViewController {
 	@IBOutlet private weak var topBar: UIView!
 	@IBOutlet private weak var headerView: UIView!
 	@IBOutlet private weak var searchBar: UISearchBar!
+	@IBOutlet private weak var headerImageView: UIImageView!
 	private let refreshControl = UIRefreshControl()
 	private var postData = [Post]()
 	
@@ -47,17 +48,27 @@ final class NewsViewController: UIViewController {
 			topBar.layer.shadowColor = UIColor.black.cgColor
 			topBar.layer.shadowOpacity = 0.1;
 		}
-		func setupTableView() {
+		func setupHeader() {
 			let textFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
 			textFieldAppearance.backgroundColor = UIColor(red: 0, green: 0.11, blue: 0.24, alpha: 0.06)
 			let labelAppearance = UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self])
 			labelAppearance.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
 			tableView.tableHeaderView = headerView
+			headerImageView.image = UIImage(named: "user_default")?.roundedImage
+			if let userId = vkService.userId {
+				userService.get(userId: userId) { [unowned self] (profiles, error) in
+					guard let profile = profiles.first else { return }
+					guard let url = profile.photoUrl else { return }
+					self.imageService.get(urlString: url, round: true) { [unowned self] image in
+						self.headerImageView.image = image
+					}
+				}
+			}
 		}
 		super.viewDidLoad()
 		setupBackground()
 		setupTopBar()
-		setupTableView()
+		setupHeader()
 		setupRefreshControl()
 		refreshControl.beginRefreshing()
 		getNewsfeed()
