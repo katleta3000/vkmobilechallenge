@@ -9,12 +9,12 @@
 import UIKit
 
 final class NewsViewController: UIViewController {
-	let PostService = ServiceLocator.shared.newsfeed
+	let newsfeedService = ServiceLocator.shared.newsfeed
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		PostService.get(completion: { (posts, error) in
+		newsfeedService.get(completion: { (posts, error) in
 			
 		})
 	}

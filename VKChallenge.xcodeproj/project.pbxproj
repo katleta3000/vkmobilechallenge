@@ -18,7 +18,7 @@
 		A83E810D2196270D00E09E55 /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83E810B2196270500E09E55 /* VKSdkFramework.framework */; };
 		A83E810E2196270D00E09E55 /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A83E810B2196270500E09E55 /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A83E811221962C5200E09E55 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E811121962C5200E09E55 /* ServiceLocator.swift */; };
-		A83E811621962F1D00E09E55 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E811521962F1D00E09E55 /* PostService.swift */; };
+		A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E811521962F1D00E09E55 /* NewsfeedService.swift */; };
 		A83E81182196323300E09E55 /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E81172196323300E09E55 /* VKService.swift */; };
 		A83E811C219640C000E09E55 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E811B219640C000E09E55 /* Post.swift */; };
 /* End PBXBuildFile section */
@@ -50,7 +50,7 @@
 		A83E8109219621CA00E09E55 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		A83E810B2196270500E09E55 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = SOURCE_ROOT; };
 		A83E811121962C5200E09E55 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		A83E811521962F1D00E09E55 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		A83E811521962F1D00E09E55 /* NewsfeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsfeedService.swift; sourceTree = "<group>"; };
 		A83E81172196323300E09E55 /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		A83E811B219640C000E09E55 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,7 +146,7 @@
 		A83E811A219640AA00E09E55 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A83E811521962F1D00E09E55 /* PostService.swift */,
+				A83E811521962F1D00E09E55 /* NewsfeedService.swift */,
 				A83E81172196323300E09E55 /* VKService.swift */,
 			);
 			path = Services;
@@ -226,7 +226,7 @@
 			files = (
 				A83678542196E64800597C16 /* Photo.swift in Sources */,
 				A83E811221962C5200E09E55 /* ServiceLocator.swift in Sources */,
-				A83E811621962F1D00E09E55 /* PostService.swift in Sources */,
+				A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */,
 				A83E81182196323300E09E55 /* VKService.swift in Sources */,
 				A83E80FE2196121A00E09E55 /* AppDelegate.swift in Sources */,
 				A83678562196E64F00597C16 /* User.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  PostService.swift
+//  NewsfeedService.swift
 //  VKChallenge
 //
 //  Created by Evgenii Rtishchev on 10/11/2018.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum PostServiceError: Error {
+enum NewsfeedServiceError: Error {
 	case modelParsing
 	case noPostDate
 	case noPostsResponse
 }
 
-/// Шаблон репозиторий или CRUD-интерфейс, задача которого реализовать работу с объектами типа Post
-final class PostService {
+/// Шаблон репозиторий или CRUD-интерфейс, который обеспечивает работу с моделями Newsfeed
+final class NewsfeedService {
 	let vkService: VKService
 	
 	init(vkService: VKService) {
@@ -35,7 +35,7 @@ final class PostService {
 						} else if let posts = response?.posts {
 							completion(posts, nil)
 						} else {
-							completion([], PostServiceError.noPostsResponse)
+							completion([], NewsfeedServiceError.noPostsResponse)
 						}
 					}
 				}
@@ -46,14 +46,14 @@ final class PostService {
 
 // MARK: - response parsing, model mapping
 
-private extension PostService {
+private extension NewsfeedService {
 	
 	func parseJSON(json: Any?) -> (posts: [Post], error: Error?) {
 		guard let dict = json as? [String : Any], let response = dict["response"] as? [String: Any] else {
-			return ([], PostServiceError.modelParsing)
+			return ([], NewsfeedServiceError.modelParsing)
 		}
 		guard let items = response["items"] as? [[String: Any]] else {
-			return ([], PostServiceError.modelParsing)
+			return ([], NewsfeedServiceError.modelParsing)
 		}
 		var posts = [Post]()
 		for item in items {
@@ -74,7 +74,7 @@ private extension PostService {
 		if let dateTimestamp = postJson["date"] as? TimeInterval {
 			post.date = Date(timeIntervalSince1970: dateTimestamp)
 		} else {
-			return (nil, PostServiceError.noPostDate)
+			return (nil, NewsfeedServiceError.noPostDate)
 		}
 		
 		if let comments = postJson["comments"] as? [String: Any], let commentsCount = comments["count"] as? UInt {
