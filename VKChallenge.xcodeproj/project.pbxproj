@@ -23,6 +23,7 @@
 		A83E811C219640C000E09E55 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E811B219640C000E09E55 /* Post.swift */; };
 		A8CC0C3C219709AF003C2C52 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C3B219709AF003C2C52 /* UserService.swift */; };
 		A8CC0C3F21970D7D003C2C52 /* ProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */; };
+		A8CC0C41219714FE003C2C52 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C40219714FE003C2C52 /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,7 @@
 		A83E811B219640C000E09E55 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A8CC0C3B219709AF003C2C52 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileParser.swift; sourceTree = "<group>"; };
+		A8CC0C40219714FE003C2C52 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				A83E811521962F1D00E09E55 /* NewsfeedService.swift */,
 				A8CC0C3B219709AF003C2C52 /* UserService.swift */,
 				A83E81172196323300E09E55 /* VKService.swift */,
+				A8CC0C40219714FE003C2C52 /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */,
 				A83E81182196323300E09E55 /* VKService.swift in Sources */,
 				A83E80FE2196121A00E09E55 /* AppDelegate.swift in Sources */,
+				A8CC0C41219714FE003C2C52 /* ImageService.swift in Sources */,
 				A83678562196E64F00597C16 /* Profile.swift in Sources */,
 				A8CC0C3C219709AF003C2C52 /* UserService.swift in Sources */,
 				A83E80FD2196121A00E09E55 /* NewsViewController.swift in Sources */,

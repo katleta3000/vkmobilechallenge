@@ -12,6 +12,7 @@ import Foundation
 final class ServiceLocator {
 	static let shared = ServiceLocator()
 	let vkService = VKService()
+	let imageService = ImageService()
 	let newsfeedService: NewsfeedService
 	let userService: UserService
 	

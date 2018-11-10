@@ -13,6 +13,7 @@ enum UserServiceError: Error {
 	case noProfilesResponse
 }
 
+/// Шаблон репозиторий или CRUD-интерфейс по работе с профилями пользователей
 final class UserService {
 	let vkService: VKService
 	
@@ -22,20 +23,20 @@ final class UserService {
 	
 	func get(userId: String, completion:@escaping ([Profile], Error?) -> Void) {
 		let params =  [(name: "user_ids", value: userId), (name: "fields", value: "photo_100")]
-		vkService.get(with: "users.get", params: params, completion: { [weak self] (data, error) in
+		self.vkService.get(with: "users.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
-				completion([], error)
+				DispatchQueue.main.async {
+					completion([], error)
+				}
 			} else {
-				DispatchQueue.global(qos: .userInitiated).async {
-					let response = self?.parseJSON(json: data)
-					DispatchQueue.main.sync {
-						if let error = response?.error {
-							completion([], error)
-						} else if let profiles = response?.profiles {
-							completion(profiles, nil)
-						} else {
-							completion([], UserServiceError.noProfilesResponse)
-						}
+				let response = self?.parseJSON(json: data)
+				DispatchQueue.main.async {
+					if let error = response?.error {
+						completion([], error)
+					} else if let profiles = response?.profiles {
+						completion(profiles, nil)
+					} else {
+						completion([], UserServiceError.noProfilesResponse)
 					}
 				}
 			}

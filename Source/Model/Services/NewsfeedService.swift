@@ -26,18 +26,18 @@ final class NewsfeedService {
 		let params =  [(name: "source_ids", value: "friends"), (name: "filter", value: "post")]
 		vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
-				completion([], error)
+				DispatchQueue.main.async {
+					completion([], error)
+				}
 			} else {
-				DispatchQueue.global(qos: .userInitiated).async {
-					let response = self?.parseJSON(json: data)
-					DispatchQueue.main.sync {
-						if let error = response?.error {
-							completion([], error)
-						} else if let posts = response?.posts {
-							completion(posts, nil)
-						} else {
-							completion([], NewsfeedServiceError.noPostsResponse)
-						}
+				let response = self?.parseJSON(json: data)
+				DispatchQueue.main.async {
+					if let error = response?.error {
+						completion([], error)
+					} else if let posts = response?.posts {
+						completion(posts, nil)
+					} else {
+						completion([], NewsfeedServiceError.noPostsResponse)
 					}
 				}
 			}
