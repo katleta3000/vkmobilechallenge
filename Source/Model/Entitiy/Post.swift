@@ -15,5 +15,6 @@ struct Post {
 	var comments: UInt = 0
 	var reposts: UInt = 0
 	var date: Date!
-	var photos: [Photo]?
+	var user: Profile?
+	var photos: [Photo] = []
 }

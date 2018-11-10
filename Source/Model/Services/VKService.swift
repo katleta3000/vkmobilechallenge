@@ -46,7 +46,7 @@ final class VKService: NSObject {
 		}
 	}
 	
-	func get(with methodName: String, params: [[String : String?]]?, completion:@escaping (Any?, Error?) -> Void) {
+	func get(with methodName: String, params: [(name: String, value: String)]?, completion:@escaping (Any?, Error?) -> Void) {
 		func raiseError(_ error: Error) {
 			completion(nil, error)
 		}
@@ -54,15 +54,22 @@ final class VKService: NSObject {
 			raiseError(VKServiceError.nilComponents);
 			return
 		}
-		components.queryItems = [
+		var items = [
 			URLQueryItem(name: "access_token", value: accessToken),
 			URLQueryItem(name: "v", value: apiVersion)
 		]
+		if let params = params {
+			for param in params {
+				items.append(URLQueryItem(name: param.name, value: param.value))
+			}
+		}
+		components.queryItems = items
 		guard let url = components.url else {
 			raiseError(VKServiceError.nilUrl);
 			return
 		}
 		let request = URLRequest(url: url)
+		print(url)
 		URLSession.shared.dataTask(with: request) { (data, response, error) in
 			if let httpResponse = response as? HTTPURLResponse {
 				if let error = error {

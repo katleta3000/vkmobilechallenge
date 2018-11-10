@@ -12,6 +12,7 @@ enum NewsfeedServiceError: Error {
 	case modelParsing
 	case noPostDate
 	case noPostsResponse
+	case noUserId
 }
 
 /// Шаблон репозиторий или CRUD-интерфейс по работе с новостной лентой, возращает массив объектов Post
@@ -23,7 +24,8 @@ final class NewsfeedService {
 	}
 	
 	func get(completion:@escaping ([Post], Error?) -> Void) {
-		vkService.get(with: "newsfeed.get", params: nil, completion: { [weak self] (data, error) in
+		let params =  [(name: "source_ids", value: "friends"), (name: "filter", value: "post")]
+		vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
 				completion([], error)
 			} else {
@@ -55,10 +57,19 @@ private extension NewsfeedService {
 		guard let items = response["items"] as? [[String: Any]] else {
 			return ([], NewsfeedServiceError.modelParsing)
 		}
+		var profiles = [Int: Profile]()
+		if let profilesJson = response["profiles"] as? [[String: Any]] {
+			for item in profilesJson {
+				let profileResponse = parseProfile(profileJSON: item)
+				if let profile = profileResponse.profile, profileResponse.error == nil {
+					profiles[profile.id] = profile
+				}
+			}
+		}
 		var posts = [Post]()
 		for item in items {
-			// TODO можно убрать raise ошибки, если не прошла валидации одного поста, а просто не включать его в итоговую выдачу
-			let postResponse = parsePost(postJson: item)
+			// TODO можно убрать raise ошибки, если не прошла валидации одного поста, а просто не включать его в итоговую выдачу, как сделано для профилей
+			let postResponse = parsePost(postJson: item, profiles: profiles)
 			if let error = postResponse.error {
 				return ([], error)
 			} else if let post = postResponse.post {
@@ -68,7 +79,7 @@ private extension NewsfeedService {
 		return (posts, nil)
 	}
 	
-	func parsePost(postJson: [String: Any]) -> (post: Post?, error: Error?) {
+	func parsePost(postJson: [String: Any], profiles: [Int: Profile]) -> (post: Post?, error: Error?) {
 		var post = Post()
 		
 		if let dateTimestamp = postJson["date"] as? TimeInterval {
@@ -89,7 +100,29 @@ private extension NewsfeedService {
 		if let views = postJson["views"] as? [String: Any], let viewsCount = views["count"] as? UInt {
 			post.views = viewsCount
 		}
+		if let sourceId = postJson["source_id"] as? Int, let profile = profiles[sourceId] {
+			post.user = profile
+		}
 		post.text = postJson["text"] as? String
 		return (post, nil)
+	}
+	
+	func parseProfile(profileJSON: [String: Any]) -> (profile: Profile?, error: Error?) {
+		guard let userId = profileJSON["id"] as? Int else {
+			return (nil, NewsfeedServiceError.noUserId)
+		}
+		var profile = Profile()
+		profile.id = userId
+		
+		if let firstName = profileJSON["first_name"] as? String {
+			profile.firstName = firstName
+		}
+		if let lastName = profileJSON["last_name"] as? String {
+			profile.lastName = lastName
+		}
+		if let url = profileJSON["photo_100"] as? String {
+			profile.photoUrl = url
+		}
+		return (profile, nil)
 	}
 }

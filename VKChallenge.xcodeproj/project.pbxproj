@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A83678542196E64800597C16 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83678532196E64800597C16 /* Photo.swift */; };
-		A83678562196E64F00597C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83678552196E64F00597C16 /* User.swift */; };
+		A83678562196E64F00597C16 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83678552196E64F00597C16 /* Profile.swift */; };
 		A83E80FD2196121A00E09E55 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E80F42196121A00E09E55 /* NewsViewController.swift */; };
 		A83E80FE2196121A00E09E55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E80F52196121A00E09E55 /* AppDelegate.swift */; };
 		A83E80FF2196121A00E09E55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A83E80F72196121A00E09E55 /* Assets.xcassets */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		A83678532196E64800597C16 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		A83678552196E64F00597C16 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A83678552196E64F00597C16 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		A83E80DE219611C000E09E55 /* VKChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83E80F42196121A00E09E55 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		A83E80F52196121A00E09E55 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 			children = (
 				A83E811B219640C000E09E55 /* Post.swift */,
 				A83678532196E64800597C16 /* Photo.swift */,
-				A83678552196E64F00597C16 /* User.swift */,
+				A83678552196E64F00597C16 /* Profile.swift */,
 			);
 			path = Entitiy;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 				A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */,
 				A83E81182196323300E09E55 /* VKService.swift in Sources */,
 				A83E80FE2196121A00E09E55 /* AppDelegate.swift in Sources */,
-				A83678562196E64F00597C16 /* User.swift in Sources */,
+				A83678562196E64F00597C16 /* Profile.swift in Sources */,
 				A83E80FD2196121A00E09E55 /* NewsViewController.swift in Sources */,
 				A83E811C219640C000E09E55 /* Post.swift in Sources */,
 				A83E810A219621CA00E09E55 /* StartViewController.swift in Sources */,
