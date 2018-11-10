@@ -15,6 +15,7 @@ struct PostPresentation {
 	let date: String
 
 	init(with post: Post) {
+		
 		func prepareAuthor() -> String {
 			if let user = post.user {
 				if let firstName = user.firstName, let lastName = user.lastName {
@@ -30,15 +31,20 @@ struct PostPresentation {
 				return ""
 			}
 		}
+		
 		func prepareDate() -> String {
 			let formatter = DateFormatter()
 			formatter.dateFormat = "d MMM в HH:mm"
 			return formatter.string(from: post.date)
 		}
 		
+		func prepareImage() -> String? {
+			return post.user?.photoUrl
+		}
+		
 		author = prepareAuthor()
 		date = prepareDate()
-		imageUrl = nil
+		imageUrl = prepareImage()
 		height = 100
 	}
 	

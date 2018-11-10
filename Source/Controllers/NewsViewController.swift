@@ -145,6 +145,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.author?.text = post.author
 		cell.date?.text = post.date
 		cell.avatar?.image = UIImage(named: "user_default")
+		if let url = post.imageUrl {
+			imageService.get(urlString: url, round: true) { image in
+				cell.avatar?.image = image
+			}
+		}
 		
 		return cell
 	}
