@@ -32,8 +32,10 @@ final class VKService: NSObject {
 	private let apiVersion = "5.87"
 	private var sdkInstance: VKSdk?
 	private var accessToken: String?
+	private var delegate: VKServiceDelegate?
 
 	func setup(with delegate: VKServiceDelegate) {
+		self.delegate = delegate
 		sdkInstance = VKSdk.initialize(withAppId: appID)
 		sdkInstance?.register(self)
 		sdkInstance?.uiDelegate = delegate
@@ -117,9 +119,20 @@ extension VKService: VKSdkDelegate {
 	}
 	
 	func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
+		if result == nil {
+			// TODO обработать ошибку – судя по крешу accessToken, он может быть nil, доверять optional не стоит
+			return
+		}
 		if result.token != nil {
 			accessToken = result.token.accessToken
 			userId = result.token.userId
+		} else {
+			// TODO обработать ошибку
+		}
+		if result.state == .authorized {
+			delegate?.authorizationFinished()
+		} else {
+			// TODO обработать ошибку
 		}
 	}
 	
