@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DRQ-TN-DLx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DRQ-TN-DLx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,11 +28,14 @@
         <scene sceneID="AFz-C3-Eip">
             <objects>
                 <viewController id="iCM-m9-bb0" customClass="StartViewController" customModule="VKChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Ax-Xw-yHh"/>
+                        <viewControllerLayoutGuide type="bottom" id="pJu-A1-AvT"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cL0-eN-QZu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="dES-OV-hip"/>
                     </view>
                     <navigationItem key="navigationItem" id="QBn-QA-mHl"/>
                     <connections>
@@ -48,6 +50,10 @@
         <scene sceneID="Tvf-zM-I6b">
             <objects>
                 <viewController id="6BF-gB-V0J" customClass="NewsViewController" customModule="VKChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Vx-zC-xgn"/>
+                        <viewControllerLayoutGuide type="bottom" id="sBY-hC-wTw"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GyB-OJ-fu8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,16 +97,41 @@
                             <constraint firstItem="Ap4-Xe-oCS" firstAttribute="top" secondItem="GyB-OJ-fu8" secondAttribute="top" id="fer-Kh-CTt"/>
                             <constraint firstItem="Z7q-bd-czk" firstAttribute="top" secondItem="GyB-OJ-fu8" secondAttribute="top" id="isf-vs-QhS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="esV-Fz-Qjw"/>
                     </view>
                     <connections>
+                        <outlet property="headerView" destination="W0y-LN-BNM" id="8QU-qw-DYf"/>
+                        <outlet property="searchBar" destination="dh1-xG-DJF" id="X8f-ou-EyQ"/>
                         <outlet property="tableView" destination="Z7q-bd-czk" id="Zgu-NC-Mmi"/>
                         <outlet property="topBar" destination="Ap4-Xe-oCS" id="Qx5-7b-eOG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZC-s1-MN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="W0y-LN-BNM">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" placeholder="Поиск" backgroundImage="fake" translatesAutoresizingMaskIntoConstraints="NO" id="dh1-xG-DJF">
+                            <rect key="frame" x="0.0" y="24" width="315" height="56"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="6BF-gB-V0J" id="YcB-Dg-ate"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="dh1-xG-DJF" firstAttribute="bottom" secondItem="W0y-LN-BNM" secondAttribute="bottom" id="9JC-Ag-u9n"/>
+                        <constraint firstItem="dh1-xG-DJF" firstAttribute="trailing" secondItem="W0y-LN-BNM" secondAttribute="trailing" constant="-60" id="lFd-wL-KR9"/>
+                        <constraint firstItem="dh1-xG-DJF" firstAttribute="leading" secondItem="W0y-LN-BNM" secondAttribute="leading" id="q1j-E8-dkR"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="228" y="42.728635682158924"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fake" width="16" height="16"/>
+    </resources>
 </document>

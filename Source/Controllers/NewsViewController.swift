@@ -15,6 +15,8 @@ final class NewsViewController: UIViewController {
 	let imageService = ServiceLocator.shared.imageService
 	@IBOutlet private weak var tableView: UITableView!
 	@IBOutlet private weak var topBar: UIView!
+	@IBOutlet private weak var headerView: UIView!
+	@IBOutlet private weak var searchBar: UISearchBar!
 	private let refreshControl = UIRefreshControl()
 	private var postData = [Post]()
 	
@@ -45,16 +47,24 @@ final class NewsViewController: UIViewController {
 			topBar.layer.shadowColor = UIColor.black.cgColor
 			topBar.layer.shadowOpacity = 0.1;
 		}
+		func setupTableView() {
+			let textFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+			textFieldAppearance.backgroundColor = UIColor(red: 0, green: 0.11, blue: 0.24, alpha: 0.06)
+			let labelAppearance = UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+			labelAppearance.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
+			tableView.tableHeaderView = headerView
+		}
 		super.viewDidLoad()
 		setupBackground()
 		setupTopBar()
+		setupTableView()
 		setupRefreshControl()
 		refreshControl.beginRefreshing()
 		getNewsfeed()
 	}
 	
 	@objc private func pulledToRefresh() {
-		stopRefreshing()
+		getNewsfeed()
 	}
 	
 	private func stopRefreshing() {
@@ -92,6 +102,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		UIView.animate(withDuration: 0.25) {
 			self.topBar.alpha = scrollView.contentOffset.y > -44 ? 1 : 0
 		}
+		searchBar.resignFirstResponder()
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
