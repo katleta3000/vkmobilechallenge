@@ -9,6 +9,10 @@
 import Foundation
 import VKSdkFramework
 
+protocol VKServiceDelegate: VKSdkUIDelegate {
+	func authorizationFinished()
+}
+
 enum VKServiceError: Error {
 	case nilComponents
 	case nilUrl
@@ -28,17 +32,14 @@ final class VKService: NSObject {
 	private var sdkInstance: VKSdk?
 	private var accessToken: String?
 
-	func setup(with delegate: VKSdkUIDelegate) {
+	func setup(with delegate: VKServiceDelegate) {
 		sdkInstance = VKSdk.initialize(withAppId: appID)
 		sdkInstance?.register(self)
 		sdkInstance?.uiDelegate = delegate
 		VKSdk.wakeUpSession(scope) { (state, error) in
 			// TODO обработать ошибку и различные состояние
 			if state == .authorized {
-				// TODO сделать вызов из нормального места
-				ServiceLocator.shared.newsfeed.get(completion: { (posts, error) in
-					
-				})
+				delegate.authorizationFinished()
 			} else {
 				VKSdk.authorize(self.scope)
 			}
@@ -92,7 +93,11 @@ final class VKService: NSObject {
 extension VKService: VKSdkDelegate {
 	
 	func vkSdkAccessTokenUpdated(_ newToken: VKAccessToken!, oldToken: VKAccessToken!) {
-		accessToken = newToken.accessToken
+		// Оказывается newToken может быть nil – произойдёт креш, видимо это обозначает, что токен протух.
+		// Давайте на следующий конкурс сделаем мобильный SDK для работы с VK API, ориентированный на Swift? :-)
+		if newToken != nil {
+			accessToken = newToken.accessToken
+		}
 	}
 	
 	func vkSdkAuthorizationStateUpdated(with result: VKAuthorizationResult!) {

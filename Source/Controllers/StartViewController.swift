@@ -19,10 +19,14 @@ final class StartViewController: UIViewController {
 	}
 }
 
-extension StartViewController: VKSdkUIDelegate {
+extension StartViewController: VKServiceDelegate {
+	
+	func authorizationFinished() {
+		performSegue(withIdentifier: "NewsViewController", sender: nil)
+	}
 	
 	func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
-		// TODO обработать капчу
+		// TODO реализовать UI для ввода капчи
 	}
 	
 	func vkSdkShouldPresent(_ controller: UIViewController!) {
