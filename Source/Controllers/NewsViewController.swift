@@ -19,9 +19,15 @@ final class NewsViewController: UIViewController {
 	@IBOutlet private weak var searchBar: UISearchBar!
 	@IBOutlet private weak var headerImageView: UIImageView!
 	private let refreshControl = UIRefreshControl()
-	private var postData = [Post]()
+	private var postData = [PostPresentation]()
 	
 	override func viewDidLoad() {
+		
+		UIFont.familyNames.forEach({ familyName in
+			let fontNames = UIFont.fontNames(forFamilyName: familyName)
+			print(familyName, fontNames)
+		})
+		
 		func setupRefreshControl() {
 			if #available(iOS 10.0, *) {
 				tableView.refreshControl = refreshControl
@@ -49,10 +55,13 @@ final class NewsViewController: UIViewController {
 			topBar.layer.shadowOpacity = 0.1;
 		}
 		func setupHeader() {
+			let font = UIFont(name: "SFProText-Regular", size: 16)
 			let textFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
 			textFieldAppearance.backgroundColor = UIColor(red: 0, green: 0.11, blue: 0.24, alpha: 0.06)
+			textFieldAppearance.font = font
 			let labelAppearance = UILabel.appearance(whenContainedInInstancesOf: [UISearchBar.self])
 			labelAppearance.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
+			labelAppearance.font = font
 			tableView.tableHeaderView = headerView
 			headerImageView.image = UIImage(named: "user_default")?.roundedImage
 			if let userId = vkService.userId {
@@ -94,8 +103,11 @@ final class NewsViewController: UIViewController {
 					}
 				} else {
 					// добавить преобразование моделей
+					let presentations = posts.map({ post -> PostPresentation in
+						return PostPresentation(with: post)
+					})
 					DispatchQueue.main.async {
-						self.postData = posts
+						self.postData = presentations
 						self.stopRefreshing()
 						self.tableView.reloadData()
 					}
@@ -128,7 +140,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableCell
 		cell.backgroundColor = .white
 		cell.setup()
-		cell.textLabel?.text = "test"
+		
+		let post = postData[indexPath.row]
+		cell.author?.text = post.author
+		cell.date?.text = post.date
+		
 		return cell
 	}
 }

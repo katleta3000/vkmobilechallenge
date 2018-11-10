@@ -27,6 +27,8 @@
 		A8CC0C4E21974407003C2C52 /* PostTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C4D21974407003C2C52 /* PostTableCell.swift */; };
 		A8CC0C512197442F003C2C52 /* PostPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C502197442F003C2C52 /* PostPresentation.swift */; };
 		A8D5282B21976D9500C8E2C6 /* UIImage+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5282A21976D9500C8E2C6 /* UIImage+Round.swift */; };
+		A8D5282F2197771300C8E2C6 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8D5282D2197771300C8E2C6 /* SF-Pro-Text-Regular.otf */; };
+		A8D528302197771300C8E2C6 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8D5282E2197771300C8E2C6 /* SF-Pro-Text-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +67,8 @@
 		A8CC0C4D21974407003C2C52 /* PostTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableCell.swift; sourceTree = "<group>"; };
 		A8CC0C502197442F003C2C52 /* PostPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresentation.swift; sourceTree = "<group>"; };
 		A8D5282A21976D9500C8E2C6 /* UIImage+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Round.swift"; sourceTree = "<group>"; };
+		A8D5282D2197771300C8E2C6 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		A8D5282E2197771300C8E2C6 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 		A83E80F62196121A00E09E55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A8D5282C2197771300C8E2C6 /* Fonts */,
 				A83E80F72196121A00E09E55 /* Assets.xcassets */,
 				A83E80F82196121A00E09E55 /* LaunchScreen.storyboard */,
 				A83E80FA2196121A00E09E55 /* Main.storyboard */,
@@ -194,6 +199,15 @@
 			path = "Presentation Models";
 			sourceTree = "<group>";
 		};
+		A8D5282C2197771300C8E2C6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A8D5282D2197771300C8E2C6 /* SF-Pro-Text-Regular.otf */,
+				A8D5282E2197771300C8E2C6 /* SF-Pro-Text-Medium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +269,8 @@
 			files = (
 				A83E81012196121A00E09E55 /* Main.storyboard in Resources */,
 				A83E80FF2196121A00E09E55 /* Assets.xcassets in Resources */,
+				A8D5282F2197771300C8E2C6 /* SF-Pro-Text-Regular.otf in Resources */,
+				A8D528302197771300C8E2C6 /* SF-Pro-Text-Medium.otf in Resources */,
 				A83E81002196121A00E09E55 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
