@@ -37,7 +37,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="QBn-QA-mHl"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="NewsViewController" id="Id6-4D-N2q"/>
+                        <segue destination="6BF-gB-V0J" kind="show" identifier="NewsViewController" id="mmr-5X-PLI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yiy-ee-eOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,19 +45,62 @@
             <point key="canvasLocation" x="-673" y="43"/>
         </scene>
         <!--News View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="Tvf-zM-I6b">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="NewsViewController" customModule="VKChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="6BF-gB-V0J" customClass="NewsViewController" customModule="VKChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GyB-OJ-fu8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.98029749610000005" blue="0.35402829130000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z7q-bd-czk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" id="92e-Pd-frj" customClass="PostTableCell" customModule="VKChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="92e-Pd-frj" id="REu-DP-40S">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6BF-gB-V0J" id="zSQ-Mw-pcC"/>
+                                    <outlet property="delegate" destination="6BF-gB-V0J" id="A8A-R3-Six"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ap4-Xe-oCS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="av5-Zo-aka"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ap4-Xe-oCS" secondAttribute="trailing" id="Cwr-wk-UVB"/>
+                            <constraint firstItem="Ap4-Xe-oCS" firstAttribute="leading" secondItem="GyB-OJ-fu8" secondAttribute="leading" id="GHs-3h-nkH"/>
+                            <constraint firstItem="Z7q-bd-czk" firstAttribute="bottom" secondItem="GyB-OJ-fu8" secondAttribute="bottom" id="IBX-b3-ck6"/>
+                            <constraint firstItem="Z7q-bd-czk" firstAttribute="trailing" secondItem="GyB-OJ-fu8" secondAttribute="trailing" id="KmC-3w-92B"/>
+                            <constraint firstItem="Z7q-bd-czk" firstAttribute="leading" secondItem="GyB-OJ-fu8" secondAttribute="leading" id="MIg-Pg-doh"/>
+                            <constraint firstItem="Ap4-Xe-oCS" firstAttribute="top" secondItem="GyB-OJ-fu8" secondAttribute="top" id="fer-Kh-CTt"/>
+                            <constraint firstItem="Z7q-bd-czk" firstAttribute="top" secondItem="GyB-OJ-fu8" secondAttribute="top" id="isf-vs-QhS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="esV-Fz-Qjw"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Z7q-bd-czk" id="Zgu-NC-Mmi"/>
+                        <outlet property="topBar" destination="Ap4-Xe-oCS" id="Qx5-7b-eOG"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZC-s1-MN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="206" y="43"/>
+            <point key="canvasLocation" x="228" y="42.728635682158924"/>
         </scene>
     </scenes>
 </document>

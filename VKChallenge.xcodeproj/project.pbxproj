@@ -24,6 +24,8 @@
 		A8CC0C3C219709AF003C2C52 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C3B219709AF003C2C52 /* UserService.swift */; };
 		A8CC0C3F21970D7D003C2C52 /* ProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */; };
 		A8CC0C41219714FE003C2C52 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C40219714FE003C2C52 /* ImageService.swift */; };
+		A8CC0C4E21974407003C2C52 /* PostTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C4D21974407003C2C52 /* PostTableCell.swift */; };
+		A8CC0C512197442F003C2C52 /* PostPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC0C502197442F003C2C52 /* PostPresentation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +61,8 @@
 		A8CC0C3B219709AF003C2C52 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileParser.swift; sourceTree = "<group>"; };
 		A8CC0C40219714FE003C2C52 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		A8CC0C4D21974407003C2C52 /* PostTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableCell.swift; sourceTree = "<group>"; };
+		A8CC0C502197442F003C2C52 /* PostPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresentation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 		A83E810F21962C3200E09E55 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A8CC0C4F21974418003C2C52 /* Presentation Models */,
+				A8CC0C4C219743E8003C2C52 /* Views */,
 				A83E8109219621CA00E09E55 /* StartViewController.swift */,
 				A83E80F42196121A00E09E55 /* NewsViewController.swift */,
 			);
@@ -167,6 +173,22 @@
 				A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		A8CC0C4C219743E8003C2C52 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A8CC0C4D21974407003C2C52 /* PostTableCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A8CC0C4F21974418003C2C52 /* Presentation Models */ = {
+			isa = PBXGroup;
+			children = (
+				A8CC0C502197442F003C2C52 /* PostPresentation.swift */,
+			);
+			path = "Presentation Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A83678542196E64800597C16 /* Photo.swift in Sources */,
+				A8CC0C512197442F003C2C52 /* PostPresentation.swift in Sources */,
 				A83E811221962C5200E09E55 /* ServiceLocator.swift in Sources */,
 				A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */,
 				A83E81182196323300E09E55 /* VKService.swift in Sources */,
@@ -253,6 +276,7 @@
 				A83E811C219640C000E09E55 /* Post.swift in Sources */,
 				A8CC0C3F21970D7D003C2C52 /* ProfileParser.swift in Sources */,
 				A83E810A219621CA00E09E55 /* StartViewController.swift in Sources */,
+				A8CC0C4E21974407003C2C52 /* PostTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ertishchev.VKChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -439,7 +463,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ertishchev.VKChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
