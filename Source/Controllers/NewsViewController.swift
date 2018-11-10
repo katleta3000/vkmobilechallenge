@@ -63,7 +63,7 @@ final class NewsViewController: UIViewController {
 			labelAppearance.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
 			labelAppearance.font = font
 			tableView.tableHeaderView = headerView
-			headerImageView.image = UIImage(named: "user_default")?.roundedImage
+			headerImageView.image = UIImage(named: "user_default")
 			if let userId = vkService.userId {
 				userService.get(userId: userId) { [unowned self] (profiles, error) in
 					guard let profile = profiles.first else { return }
@@ -144,6 +144,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		let post = postData[indexPath.row]
 		cell.author?.text = post.author
 		cell.date?.text = post.date
+		cell.avatar?.image = UIImage(named: "user_default")
 		
 		return cell
 	}
