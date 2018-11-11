@@ -21,25 +21,28 @@ final class NewsfeedService {
 		self.vkService = vkService
 	}
 	
-	func get(completion:@escaping ([Post], Error?) -> Void) {
-		let params =  [(name: "source_ids", value: "friends,groups,pages"),
+	func get(from: String? = nil, completion:@escaping ([Post], String?, Error?) -> Void) {
+		var params =  [(name: "source_ids", value: "friends,groups,pages"),
 					   (name: "filters", value: "post"),
-					   (name: "count", value: "10")
+					   (name: "count", value: "20")
 		]
+		if let startFrom = from {
+			params.append((name: "start_from", value: startFrom))
+		}
 		vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
 				DispatchQueue.main.async {
-					completion([], error)
+					completion([], nil, error)
 				}
 			} else {
 				let response = self?.parseJSON(json: data)
 				DispatchQueue.main.async {
 					if let error = response?.error {
-						completion([], error)
+						completion([], nil, error)
 					} else if let posts = response?.posts {
-						completion(posts, nil)
+						completion(posts, response?.nextFrom, nil)
 					} else {
-						completion([], NewsfeedServiceError.noPostsResponse)
+						completion([], nil, NewsfeedServiceError.noPostsResponse)
 					}
 				}
 			}
@@ -51,12 +54,12 @@ final class NewsfeedService {
 
 private extension NewsfeedService {
 	
-	func parseJSON(json: Any?) -> (posts: [Post], error: Error?) {
+	func parseJSON(json: Any?) -> (posts: [Post], nextFrom: String?, error: Error?) {
 		guard let dict = json as? [String : Any], let response = dict["response"] as? [String: Any] else {
-			return ([], NewsfeedServiceError.modelParsing)
+			return ([], nil, NewsfeedServiceError.modelParsing)
 		}
 		guard let items = response["items"] as? [[String: Any]] else {
-			return ([], NewsfeedServiceError.modelParsing)
+			return ([], nil, NewsfeedServiceError.modelParsing)
 		}
 		var profiles = [Int: Profile]()
 		if let profilesJson = response["profiles"] as? [[String: Any]] {
@@ -81,11 +84,12 @@ private extension NewsfeedService {
 			// TODO можно убрать raise ошибки, если не прошла валидации одного поста, а просто не включать его в итоговую выдачу, как сделано для профилей
 			let postResponse = PostParser.parse(postJson: item, profiles: profiles, groups: groups)
 			if let error = postResponse.error {
-				return ([], error)
+				return ([], nil, error)
 			} else if let post = postResponse.post {
 				posts.append(post)
 			}
 		}
-		return (posts, nil)
+		let nextFrom = response["next_from"] as? String
+		return (posts, nextFrom, nil)
 	}
 }

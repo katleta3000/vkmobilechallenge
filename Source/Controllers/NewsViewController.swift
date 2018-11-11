@@ -9,24 +9,25 @@
 import UIKit
 
 final class NewsViewController: UIViewController {
+	// DI
 	let vkService = ServiceLocator.shared.vkService
 	let newsfeedService = ServiceLocator.shared.newsfeedService
 	let userService = ServiceLocator.shared.userService
 	let imageService = ServiceLocator.shared.imageService
+	// Interface
 	@IBOutlet private weak var tableView: UITableView!
 	@IBOutlet private weak var topBar: UIView!
 	@IBOutlet private weak var headerView: UIView!
 	@IBOutlet private weak var searchBar: UISearchBar!
 	@IBOutlet private weak var headerImageView: UIImageView!
 	private let refreshControl = UIRefreshControl()
+	// Data & models
 	private var postData = [PostPresentation]()
+	private var nextFrom: String?
+	
+	// MARK: - life cycle
 	
 	override func viewDidLoad() {
-		
-		UIFont.familyNames.forEach({ familyName in
-			let fontNames = UIFont.fontNames(forFamilyName: familyName)
-			print(familyName, fontNames)
-		})
 		
 		func setupRefreshControl() {
 			if #available(iOS 10.0, *) {
@@ -36,6 +37,7 @@ final class NewsViewController: UIViewController {
 			}
 			refreshControl.addTarget(self, action: #selector(pulledToRefresh), for: .valueChanged)
 		}
+		
 		func setupBackground() {
 			let view = UIView(frame: self.view.bounds)
 			let gradient = CAGradientLayer()
@@ -47,6 +49,7 @@ final class NewsViewController: UIViewController {
 			self.view.insertSubview(view, belowSubview: tableView)
 			tableView.backgroundColor = .clear
 		}
+		
 		func setupTopBar() {
 			topBar.layer.masksToBounds = false
 			topBar.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -54,6 +57,7 @@ final class NewsViewController: UIViewController {
 			topBar.layer.shadowColor = UIColor.black.cgColor
 			topBar.layer.shadowOpacity = 0.1;
 		}
+		
 		func setupHeader() {
 			let font = UIFont(name: "SFProText-Regular", size: 16)
 			let textFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
@@ -74,6 +78,7 @@ final class NewsViewController: UIViewController {
 				}
 			}
 		}
+		
 		super.viewDidLoad()
 		setupBackground()
 		setupTopBar()
@@ -82,6 +87,11 @@ final class NewsViewController: UIViewController {
 		refreshControl.beginRefreshing()
 		getNewsfeed()
 	}
+}
+
+// MARK: actions and logic
+
+extension NewsViewController {
 	
 	@objc private func pulledToRefresh() {
 		getNewsfeed()
@@ -93,8 +103,8 @@ final class NewsViewController: UIViewController {
 		}
 	}
 	
-	private func getNewsfeed() {
-		newsfeedService.get { [unowned self] (posts, error) in
+	private func getNewsfeed(from: String? = nil) {
+		newsfeedService.get(from: from) { [unowned self] (posts, nextFrom, error) in
 			DispatchQueue.global(qos: .userInitiated).async {
 				if let _ = error {
 					// TODO обработать ошибку
@@ -107,6 +117,7 @@ final class NewsViewController: UIViewController {
 						return PostPresentation(with: post)
 					})
 					DispatchQueue.main.async {
+						self.nextFrom = nextFrom
 						self.postData = presentations
 						self.stopRefreshing()
 						self.tableView.reloadData()
