@@ -16,12 +16,14 @@ enum NewsfeedServiceError: Error {
 /// Шаблон репозиторий или CRUD-интерфейс по работе с новостной лентой, возращает массив объектов Post
 final class NewsfeedService {
 	let vkService: VKService
+	// При вызове нового метода инвалидируем предыдущий запрос – это будем считать защитой от ситуации, когда у нас догружается низ ленты, а мы сделали pull-to-refresh и нам нужно остановить запрос на дозагрузку (так сделано в нативном VK-клиенте)
+	weak var previousRequest: URLSessionDataTask?
 	
 	init(vkService: VKService) {
 		self.vkService = vkService
 	}
 	
-	func get(from: String? = nil, completion:@escaping ([Post], String?, Error?) -> Void) {
+	func get(from: String? = nil, completion:@escaping ([Post], String?, Bool, Error?) -> Void) {
 		var params =  [(name: "source_ids", value: "friends,groups,pages"),
 					   (name: "filters", value: "post"),
 					   (name: "count", value: "20")
@@ -29,20 +31,21 @@ final class NewsfeedService {
 		if let startFrom = from {
 			params.append((name: "start_from", value: startFrom))
 		}
-		vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
+		previousRequest?.cancel()
+		previousRequest = vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
 				DispatchQueue.main.async {
-					completion([], nil, error)
+					completion([], nil, from != nil, error)
 				}
 			} else {
 				let response = self?.parseJSON(json: data)
 				DispatchQueue.main.async {
 					if let error = response?.error {
-						completion([], nil, error)
+						completion([], nil, from != nil, error)
 					} else if let posts = response?.posts {
-						completion(posts, response?.nextFrom, nil)
+						completion(posts, response?.nextFrom, from != nil, nil)
 					} else {
-						completion([], nil, NewsfeedServiceError.noPostsResponse)
+						completion([], nil, from != nil, NewsfeedServiceError.noPostsResponse)
 					}
 				}
 			}

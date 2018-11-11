@@ -37,8 +37,6 @@ final class NewsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		
-		print(UIApplication.shared.statusBarFrame)
-		
 		func setupRefreshControl() {
 			if #available(iOS 10.0, *) {
 				tableView.refreshControl = refreshControl
@@ -123,7 +121,7 @@ extension NewsViewController {
 	}
 	
 	private func getNewsfeed(from: String? = nil) {
-		newsfeedService.get(from: from) { [unowned self] (posts, nextFrom, error) in
+		newsfeedService.get(from: from) { [unowned self] (posts, nextFrom, wasLoadingMore, error) in
 			DispatchQueue.global(qos: .userInitiated).async {
 				if let _ = error {
 					// TODO обработать ошибку
@@ -135,13 +133,19 @@ extension NewsViewController {
 					let presentations = posts.map({ post -> PostPresentation in
 						return PostPresentation(with: post)
 					})
-					DispatchQueue.main.async {
-						self.nextFrom = nextFrom
-						self.postData = presentations
+					DispatchQueue.main.async {						
+						if wasLoadingMore {
+							self.postData.append(contentsOf: presentations)
+						} else {
+							self.postData = presentations
+						}
+						self.loadingMore = false
+						self.footerLoader.stopAnimating()
 						self.stopRefreshing()
+						self.tableView.reloadData()
 						self.footerLabel.isHidden = false
 						self.footerLabel.text = FooterPresentation.text(for: presentations.count)
-						self.tableView.reloadData()
+						self.nextFrom = nextFrom
 					}
 				}
 			}
@@ -161,7 +165,13 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		let currentOffset = scrollView.contentOffset.y
 		let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
 		let deltaOffset = maximumOffset - currentOffset
-		print(deltaOffset)
+		let additionalOffset = -(UIApplication.shared.statusBarFrame.height)
+		if deltaOffset < additionalOffset && !loadingMore && nextFrom != nil && postData.count > 0 {
+			loadingMore = true
+			footerLabel.isHidden = true
+			footerLoader.startAnimating()
+			getNewsfeed(from: nextFrom)
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
