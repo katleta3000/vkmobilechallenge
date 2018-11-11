@@ -22,7 +22,10 @@ final class NewsfeedService {
 	}
 	
 	func get(completion:@escaping ([Post], Error?) -> Void) {
-		let params =  [(name: "source_ids", value: "friends,groups,pages"), (name: "filter", value: "post")]
+		let params =  [(name: "source_ids", value: "friends,groups,pages"),
+					   (name: "filters", value: "post"),
+					   (name: "count", value: "10")
+		]
 		vkService.get(with: "newsfeed.get", params: params, completion: { [weak self] (data, error) in
 			if let error = error {
 				DispatchQueue.main.async {
