@@ -107,11 +107,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZC-s1-MN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="W0y-LN-BNM">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <searchBar contentMode="redraw" placeholder="Поиск" backgroundImage="fake" translatesAutoresizingMaskIntoConstraints="NO" id="dh1-xG-DJF">
-                            <rect key="frame" x="0.0" y="24" width="315" height="56"/>
+                            <rect key="frame" x="0.0" y="27" width="325" height="56"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <textInputTraits key="textInputTraits"/>
@@ -120,7 +120,7 @@
                             </connections>
                         </searchBar>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-pO-VUh">
-                            <rect key="frame" x="327" y="34" width="36" height="36"/>
+                            <rect key="frame" x="327" y="37" width="36" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="hgv-BI-yYP"/>
                                 <constraint firstAttribute="width" constant="36" id="opt-Nd-PEg"/>
@@ -129,10 +129,10 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="dh1-xG-DJF" firstAttribute="bottom" secondItem="W0y-LN-BNM" secondAttribute="bottom" id="9JC-Ag-u9n"/>
+                        <constraint firstItem="dh1-xG-DJF" firstAttribute="bottom" secondItem="W0y-LN-BNM" secondAttribute="bottom" constant="4" id="9JC-Ag-u9n"/>
                         <constraint firstAttribute="trailing" secondItem="1Pu-pO-VUh" secondAttribute="trailing" constant="12" id="RTf-mg-ehB"/>
                         <constraint firstItem="1Pu-pO-VUh" firstAttribute="centerY" secondItem="dh1-xG-DJF" secondAttribute="centerY" id="dVa-RN-rFw"/>
-                        <constraint firstItem="dh1-xG-DJF" firstAttribute="trailing" secondItem="W0y-LN-BNM" secondAttribute="trailing" constant="-60" id="lFd-wL-KR9"/>
+                        <constraint firstItem="dh1-xG-DJF" firstAttribute="trailing" secondItem="W0y-LN-BNM" secondAttribute="trailing" constant="-50" id="lFd-wL-KR9"/>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="leading" secondItem="W0y-LN-BNM" secondAttribute="leading" id="q1j-E8-dkR"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="ES3-JK-Qv1"/>
