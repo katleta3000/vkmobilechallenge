@@ -15,6 +15,7 @@ final class ImageService {
 	init() {
 		let configuration = URLSessionConfiguration.default
 		configuration.urlCache = URLCache(memoryCapacity: 50 * MB, diskCapacity: 50 * MB, diskPath: "images")
+		configuration.httpMaximumConnectionsPerHost = 10
 		session = URLSession(configuration: configuration)
 	}
 

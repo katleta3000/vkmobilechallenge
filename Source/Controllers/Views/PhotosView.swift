@@ -17,6 +17,7 @@ final class MyImageView: UIImageView {
 final class PhotosView: UIView {
 	private let barHeight: CGFloat = 39
 	private weak var pageControl: UIPageControl?
+	private var previousPhotos = [Photo]()
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -29,6 +30,26 @@ final class PhotosView: UIView {
 	
 	// Вот и полетел от нехватки времени MVC, сервис прям во View прилетел :(. Хотя бы DI
 	func update(photos: [Photo], imageService: ImageService) {
+		// Небольшая оптимизация
+		if previousPhotos.count == photos.count, photos.count == 1 {
+			if previousPhotos[0].url == photos[0].url {
+				return
+			}
+		} else if previousPhotos.count == photos.count, photos.count > 0 {
+			var hasChanges = false
+			for i in 0..<photos.count {
+				if previousPhotos[i].url != photos[i].url {
+					hasChanges = true
+					break
+				}
+			}
+			if !hasChanges {
+				return
+			}
+		}
+		
+		previousPhotos = photos
+		
 		for view in subviews {
 			view.removeFromSuperview()
 		}
