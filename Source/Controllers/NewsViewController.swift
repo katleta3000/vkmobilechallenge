@@ -20,6 +20,7 @@ final class NewsViewController: UIViewController {
 	private let refreshControl = UIRefreshControl()
 	@IBOutlet private weak var tableView: UITableView!
 	@IBOutlet private weak var topBar: UIView!
+	@IBOutlet private weak var topBarHeight: NSLayoutConstraint!
 	@IBOutlet private weak var headerView: UIView!
 	@IBOutlet private weak var searchBar: UISearchBar!
 	@IBOutlet private weak var headerImageView: UIImageView!
@@ -35,6 +36,8 @@ final class NewsViewController: UIViewController {
 	// MARK: - life cycle
 	
 	override func viewDidLoad() {
+		
+		print(UIApplication.shared.statusBarFrame)
 		
 		func setupRefreshControl() {
 			if #available(iOS 10.0, *) {
@@ -63,6 +66,8 @@ final class NewsViewController: UIViewController {
 			topBar.layer.shadowRadius = 8;
 			topBar.layer.shadowColor = UIColor.black.cgColor
 			topBar.layer.shadowOpacity = 0.1;
+			topBarHeight.constant = UIApplication.shared.statusBarFrame.size.height
+			topBar.setNeedsLayout()
 		}
 		
 		func setupHeader() {
@@ -150,7 +155,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		UIView.animate(withDuration: 0.25) {
-			self.topBar.alpha = scrollView.contentOffset.y > -44 ? 1 : 0
+			self.topBar.alpha = scrollView.contentOffset.y > 0 ? 1 : 0
 		}
 		searchBar.resignFirstResponder()
 		let currentOffset = scrollView.contentOffset.y
