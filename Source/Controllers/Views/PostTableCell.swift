@@ -15,6 +15,7 @@ final class PostTableCell: UITableViewCell {
 	private weak var views: UILabel?
 	private weak var textContentLabel: UILabel?
 	private weak var limitView: UIView?
+	private weak var photosView: PhotosView?
 	weak var avatar: UIImageView?
 	weak var author: UILabel?
 	weak var date: UILabel?
@@ -144,6 +145,11 @@ final class PostTableCell: UITableViewCell {
 			containerView!.addSubview(view)
 			showFull = view
 		}
+		if photosView == nil {
+			let view = PhotosView(frame: CGRect())
+			containerView!.addSubview(view)
+			photosView = view
+		}
 	}
 	
 	func updateViewsIcon(countString: String) {
@@ -160,6 +166,8 @@ final class PostTableCell: UITableViewCell {
 	}
 	
 	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat, photosHeight: CGFloat, limited: Bool) {
+		
+		photosView?.isHidden = photosHeight == 0
 		
 		limitView?.alpha = limited ? 1 : 0
 		showFull?.alpha = limited ? 1 : 0
@@ -185,6 +193,11 @@ final class PostTableCell: UITableViewCell {
 			buttonFrame.size.height = newHeight
 			buttonFrame.origin.y = limitFrame.origin.y - (newHeight - limitFrame.size.height) / 2
 			showFull?.frame = buttonFrame
+		}
+		
+		if var photosFrame = photosView?.frame, let containerHeight = containerView?.bounds.size.height, let containerWidth = containerView?.bounds.size.width {
+			photosFrame = CGRect(x: 0, y: containerHeight - bottomViewHeight - photosHeight, width: containerWidth, height: photosHeight)
+			photosView?.frame = photosFrame
 		}
 		
 		if var frame = bottomView?.frame, let containerHeight = containerView?.bounds.size.height {
