@@ -159,7 +159,7 @@ final class PostTableCell: UITableViewCell {
 		viewsImage.isHidden = false
 	}
 	
-	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat, limited: Bool) {
+	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat, photosHeight: CGFloat, limited: Bool) {
 		
 		limitView?.alpha = limited ? 1 : 0
 		showFull?.alpha = limited ? 1 : 0
@@ -175,7 +175,7 @@ final class PostTableCell: UITableViewCell {
 		}
 		
 		if var frame = limitView?.frame, let containerHeight = containerView?.bounds.size.height {
-			frame.origin.y = containerHeight - bottomViewHeight - limitHeight
+			frame.origin.y = containerHeight - bottomViewHeight - limitHeight - photosHeight
 			limitView?.frame = frame
 		}
 		

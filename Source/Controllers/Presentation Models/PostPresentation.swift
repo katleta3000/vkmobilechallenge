@@ -11,6 +11,7 @@ import UIKit
 struct PostPresentation {
 	let totalHeight: CGFloat
 	let textHeight: CGFloat
+	let totalPhotosHeight: CGFloat
 	
 	let imageUrl: String?
 	let author: String
@@ -24,6 +25,9 @@ struct PostPresentation {
 	
 	var isCompact = false
 	
+	// требований по фотографиям не было, плюс, API похоже адаптирован именно для вертикальной выдачи – так как сжимает он как раз сильно широкие фотографии
+	private let photoHeight = (UIScreen.main.bounds.size.width - 12) * 2 / 3
+	private let photoGalleryBarHeight: CGFloat = 39
 	private let maxWidth = UIScreen.main.bounds.size.width - 40
 	private let compactTextHeight: CGFloat = 128 // 127.406 – 6 строк с emoji тоже всё ок
 	private let compactTextLimit: CGFloat = 173 // 171.203125 - 8 строк
@@ -99,11 +103,21 @@ struct PostPresentation {
 			self.text = nil
 			textHeight = 0
 		}
-		totalHeight = max(124, 124 + textHeight) // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 6 (отсуп самого бабла)
+		
 		photos = post.photos
+		let count = post.photos.count
+		if count == 1 {
+			totalPhotosHeight = photoHeight
+		} else if count > 1 {
+			totalPhotosHeight = photoHeight + photoGalleryBarHeight
+		} else {
+			totalPhotosHeight = 0
+		}
+		
+		totalHeight = max(124, 124 + textHeight + totalPhotosHeight) // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 6 (отсуп самого бабла)
 	}
 	
 	func compactHeight() -> CGFloat {
-		return 124 + compactTextHeight + limitAddHeight
+		return 124 + compactTextHeight + limitAddHeight + totalPhotosHeight
 	}
 }

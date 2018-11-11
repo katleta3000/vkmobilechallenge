@@ -166,7 +166,11 @@ extension NewsViewController {
 		if let cell = tableView.cellForRow(at: indexPath) as? PostTableCell {
 			tableView.beginUpdates()
 			UIView.animate(withDuration: 0.25) {
-				cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
+				cell.updateContent(text: post.text,
+								   textHeight: post.textHeight,
+								   totalHeight: post.totalHeight,
+								   photosHeight: post.totalPhotosHeight,
+								   limited: post.isCompact)
 			}
 			tableView.endUpdates()
 		}
@@ -221,7 +225,11 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.comments?.text = post.comments
 		cell.reposts?.text = post.reposts
 		cell.updateViewsIcon(countString: post.views)
-		cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.isCompact ? post.compactHeight() : post.totalHeight, limited: post.isCompact)
+		cell.updateContent(text: post.text,
+						   textHeight: post.textHeight,
+						   totalHeight: post.isCompact ? post.compactHeight() : post.totalHeight,
+						   photosHeight: post.totalPhotosHeight,
+						   limited: post.isCompact)
 		cell.showFull?.tag = indexPath.row
 		cell.showFull?.addTarget(self, action: #selector(clickedShowFull), for: .touchUpInside)
 		
