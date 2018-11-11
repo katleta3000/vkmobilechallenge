@@ -95,11 +95,18 @@ final class NewsViewController: UIViewController {
 			footerLabel.textColor = UIColor(red: 0.56, green: 0.58, blue: 0.6, alpha: 1)
 		}
 		
+		func setupTableForSmoothScroll() {
+			tableView.estimatedRowHeight = 0;
+			tableView.estimatedSectionHeaderHeight = 0;
+			tableView.estimatedSectionFooterHeight = 0;
+		}
+		
 		super.viewDidLoad()
 		setupBackground()
 		setupTopBar()
 		setupHeader()
 		setupFooter()
+		setupTableForSmoothScroll()
 		setupRefreshControl()
 		refreshControl.beginRefreshing()
 		getNewsfeed()
@@ -133,16 +140,16 @@ extension NewsViewController {
 					let presentations = posts.map({ post -> PostPresentation in
 						return PostPresentation(with: post)
 					})
-					DispatchQueue.main.async {						
+					DispatchQueue.main.async {
 						if wasLoadingMore {
 							self.postData.append(contentsOf: presentations)
 						} else {
 							self.postData = presentations
 						}
+						self.tableView.reloadData()
 						self.loadingMore = false
 						self.footerLoader.stopAnimating()
 						self.stopRefreshing()
-						self.tableView.reloadData()
 						self.footerLabel.isHidden = false
 						self.footerLabel.text = FooterPresentation.text(for: presentations.count)
 						self.nextFrom = nextFrom
