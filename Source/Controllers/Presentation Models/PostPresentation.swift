@@ -9,7 +9,9 @@
 import UIKit
 
 struct PostPresentation {
-	let height: CGFloat
+	let maxWidth = UIScreen.main.bounds.size.width - 40
+	let totalHeight: CGFloat
+	let textHeight: CGFloat
 	let imageUrl: String?
 	let author: String
 	let date: String
@@ -17,6 +19,7 @@ struct PostPresentation {
 	let reposts: String
 	let comments: String
 	let views: String
+	let text: NSAttributedString?
 
 	init(with post: Post) {
 		
@@ -64,6 +67,27 @@ struct PostPresentation {
 		reposts = "\(post.reposts)"
 		comments = "\(post.comments)"
 		views = prepareViews()
-		height = 120
+		
+		if let text = post.text, text.count > 0 {
+			let attributedString = NSMutableAttributedString(string: text)
+			let range = NSMakeRange(0, attributedString.string.count - 1)
+			if let font = UIFont(name: "SFProText-Regular", size: 15) {
+				attributedString.addAttributes([NSAttributedString.Key.font: font], range: range)
+			}
+			attributedString.addAttributes([NSAttributedString.Key.kern: -0.17], range: range)
+			let paragraphStyle = NSMutableParagraphStyle()
+			paragraphStyle.lineBreakMode = .byWordWrapping
+			paragraphStyle.lineSpacing = 4
+			attributedString.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: range)
+			
+			let size = attributedString.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+			
+			self.text = attributedString
+			textHeight = size.height
+		} else {
+			self.text = nil
+			textHeight = 0
+		}
+		totalHeight = 118 + textHeight // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 12 (отсупы самого бабла)
 	}
 }

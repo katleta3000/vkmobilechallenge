@@ -13,24 +13,27 @@ final class PostTableCell: UITableViewCell {
 	private weak var bottomView: UIView?
 	private weak var viewsImage: UIImageView?
 	private weak var views: UILabel?
+	private weak var textContent: UILabel?
 	weak var avatar: UIImageView?
 	weak var author: UILabel?
 	weak var date: UILabel?
 	weak var likes: UILabel?
 	weak var comments: UILabel?
 	weak var reposts: UILabel?
+	let topOffsetToText: CGFloat = 58
+	let bottomViewHeight: CGFloat = 48
 	
 	func setup() {
 		backgroundColor = .clear
 		if containerView == nil {
-			let view = UIView(frame: CGRect(x: 8, y: 6, width: bounds.size.width - 16, height: bounds.size.height - 12))
+			let view = UIView(frame: CGRect(x: 8, y: 6, width: contentView.bounds.size.width - 16, height: contentView.bounds.size.height - 12))
 			view.backgroundColor = .white
 			view.layer.cornerRadius = 10
-			addSubview(view)
+			contentView.insertSubview(view, at: 0)
 			containerView = view
 		}
 		if bottomView == nil {
-			let view = UIView(frame: CGRect(x: 0, y: containerView!.bounds.size.height - 48, width: containerView!.bounds.size.width, height: 48))
+			let view = UIView(frame: CGRect(x: 0, y: containerView!.bounds.size.height - bottomViewHeight, width: containerView!.bounds.size.width, height: bottomViewHeight))
 			view.backgroundColor = .clear
 			containerView!.addSubview(view)
 			bottomView = view
@@ -107,6 +110,15 @@ final class PostTableCell: UITableViewCell {
 			bottomView!.addSubview(view)
 			views = view
 		}
+		if textContent == nil {
+			let view = UILabel(frame: CGRect(x: 12, y: 58, width: containerView!.bounds.size.width - 24, height: 0))
+			view.backgroundColor = .white
+			view.textColor = UIColor(red: 0.17, green: 0.18, blue: 0.19, alpha: 1)
+			view.font = UIFont(name: "SFProText-Regular", size: 15)
+			view.numberOfLines = 0
+			containerView!.addSubview(view)
+			textContent = view
+		}
 	}
 	
 	func updateViewsIcon(countString: String) {
@@ -120,5 +132,22 @@ final class PostTableCell: UITableViewCell {
 		frame.origin.x = views.frame.origin.x - frame.size.width - 2
 		viewsImage.frame = frame
 		viewsImage.isHidden = false
+	}
+	
+	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat) {
+		
+		if var frame = containerView?.frame {
+			frame.size.height = totalHeight - 12
+			containerView?.frame = frame
+		}
+		if var frame = textContent?.frame {
+			frame.size.height = textHeight
+			textContent?.frame = frame
+		}
+		if var frame = bottomView?.frame, let containerHeight = containerView?.bounds.size.height {
+			frame.origin.y = containerHeight - bottomViewHeight
+			bottomView?.frame = frame
+		}
+		textContent?.attributedText = text
 	}
 }
