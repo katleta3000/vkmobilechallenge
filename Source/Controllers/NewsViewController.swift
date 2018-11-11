@@ -232,6 +232,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 						   limited: post.isCompact)
 		cell.showFull?.tag = indexPath.row
 		cell.showFull?.addTarget(self, action: #selector(clickedShowFull), for: .touchUpInside)
+		cell.updateContent(photos: post.photos, imageService: imageService)
 		
 		return cell
 	}

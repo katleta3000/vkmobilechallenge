@@ -206,4 +206,8 @@ final class PostTableCell: UITableViewCell {
 		}
 		textContentLabel?.attributedText = text
 	}
+	
+	func updateContent(photos: [Photo], imageService: ImageService) {
+		photosView?.update(photos: photos, imageService: imageService)
+	}
 }
