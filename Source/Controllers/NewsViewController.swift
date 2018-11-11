@@ -208,7 +208,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.comments?.text = post.comments
 		cell.reposts?.text = post.reposts
 		cell.updateViewsIcon(countString: post.views)
-		cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight)
+		cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
 		
 		return cell
 	}

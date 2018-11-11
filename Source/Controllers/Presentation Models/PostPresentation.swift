@@ -9,7 +9,6 @@
 import UIKit
 
 struct PostPresentation {
-	let maxWidth = UIScreen.main.bounds.size.width - 40
 	let totalHeight: CGFloat
 	let textHeight: CGFloat
 	let imageUrl: String?
@@ -20,6 +19,12 @@ struct PostPresentation {
 	let comments: String
 	let views: String
 	let text: NSAttributedString?
+	var isCompact = false
+	
+	private let maxWidth = UIScreen.main.bounds.size.width - 40
+	private let compactTextHeight: CGFloat = 22 * 6 // 6 строк
+	private let compactTextLimit: CGFloat = 22 * 8 // 8 строк
+	private let limitAddHeight: CGFloat = 22 // для кнопки "Показать всё"
 
 	init(with post: Post) {
 		
@@ -83,11 +88,16 @@ struct PostPresentation {
 			let size = attributedString.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
 			
 			self.text = attributedString
-			textHeight = size.height
+			if size.height >= compactTextLimit {
+				textHeight = compactTextHeight
+				isCompact = true
+			} else {
+				textHeight = size.height
+			}
 		} else {
 			self.text = nil
 			textHeight = 0
 		}
-		totalHeight = max(124, 124 + textHeight - 6) // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 12 (отсупы самого бабла)
+		totalHeight = max(124, 124 + textHeight - 6 + (isCompact ? limitAddHeight : 0)) // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 6 (отсуп самого бабла)
 	}
 }
