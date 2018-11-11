@@ -158,6 +158,17 @@ extension NewsViewController {
 			}
 		}
 	}
+	
+	@objc func clickedShowFull(sender: UIButton) {
+		postData[sender.tag].isCompact = false
+		let post = postData[sender.tag]
+		let indexPath = IndexPath(row: sender.tag, section: 0)
+		if let cell = tableView.cellForRow(at: indexPath) as? PostTableCell {
+			tableView.beginUpdates()
+			cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
+			tableView.endUpdates()
+		}
+	}
 }
 
 // MARK: table view delegates & data source
@@ -183,7 +194,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		let post = postData[indexPath.row]
-		return post.totalHeight
+		return post.isCompact ? post.compactHeight() : post.totalHeight
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -208,7 +219,9 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.comments?.text = post.comments
 		cell.reposts?.text = post.reposts
 		cell.updateViewsIcon(countString: post.views)
-		cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
+		cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.isCompact ? post.compactHeight() : post.totalHeight, limited: post.isCompact)
+		cell.showFull?.tag = indexPath.row
+		cell.showFull?.addTarget(self, action: #selector(clickedShowFull), for: .touchUpInside)
 		
 		return cell
 	}

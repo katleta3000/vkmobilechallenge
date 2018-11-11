@@ -66,6 +66,7 @@ final class PostTableCell: UITableViewCell {
 			label.textColor = UIColor(red: 0.17, green: 0.18, blue: 0.19, alpha: 1)
 			label.font = UIFont(name: "SFProText-Regular", size: 15)
 			label.numberOfLines = 0
+			label.backgroundColor = .yellow
 			containerView!.addSubview(label)
 			textContentLabel = label
 		}
@@ -161,8 +162,8 @@ final class PostTableCell: UITableViewCell {
 	
 	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat, limited: Bool) {
 		
-		limitView?.isHidden = !limited
-		showFull?.isHidden = !limited
+		limitView?.alpha = limited ? 1 : 0
+		showFull?.alpha = limited ? 1 : 0
 
 		if var frame = containerView?.frame {
 			frame.size.height = totalHeight - 12
