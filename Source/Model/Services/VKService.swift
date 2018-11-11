@@ -78,7 +78,7 @@ final class VKService: NSObject {
 					raiseError(VKServiceError.connectionError(error: error))
 					return;
 				}
-				if httpResponse.statusCode == 200 {
+				if 200...299 ~= httpResponse.statusCode {
 					guard let data = data else {
 						raiseError(VKServiceError.noData)
 						return;
@@ -111,7 +111,11 @@ extension VKService: VKSdkDelegate {
 	}
 	
 	func vkSdkAuthorizationStateUpdated(with result: VKAuthorizationResult!) {
-		// TODO обработать изменение стейта авторизации
+		if result.state == .authorized {
+			delegate?.authorizationFinished()
+		} else {
+			// TODO обработать изменение стейта авторизации и ошибки
+		}
 	}
 	
 	func vkSdkTokenHasExpired(_ expiredToken: VKAccessToken!) {

@@ -9,21 +9,28 @@
 import UIKit
 
 final class NewsViewController: UIViewController {
+	
 	// DI
 	let vkService = ServiceLocator.shared.vkService
 	let newsfeedService = ServiceLocator.shared.newsfeedService
 	let userService = ServiceLocator.shared.userService
 	let imageService = ServiceLocator.shared.imageService
+	
 	// Interface
+	private let refreshControl = UIRefreshControl()
 	@IBOutlet private weak var tableView: UITableView!
 	@IBOutlet private weak var topBar: UIView!
 	@IBOutlet private weak var headerView: UIView!
 	@IBOutlet private weak var searchBar: UISearchBar!
 	@IBOutlet private weak var headerImageView: UIImageView!
-	private let refreshControl = UIRefreshControl()
+	@IBOutlet private weak var footerView: UIView!
+	@IBOutlet private weak var footerLoader: UIActivityIndicatorView!
+	@IBOutlet private weak var footerLabel: UILabel!
+	
 	// Data & models
 	private var postData = [PostPresentation]()
 	private var nextFrom: String?
+	private var loadingMore: Bool = false
 	
 	// MARK: - life cycle
 	
@@ -79,10 +86,17 @@ final class NewsViewController: UIViewController {
 			}
 		}
 		
+		func setupFooter() {
+			tableView.tableFooterView = footerView
+			footerLabel.font = UIFont(name: "SFProText-Regular", size: 13)
+			footerLabel.textColor = UIColor(red: 0.56, green: 0.58, blue: 0.6, alpha: 1)
+		}
+		
 		super.viewDidLoad()
 		setupBackground()
 		setupTopBar()
 		setupHeader()
+		setupFooter()
 		setupRefreshControl()
 		refreshControl.beginRefreshing()
 		getNewsfeed()
@@ -120,6 +134,8 @@ extension NewsViewController {
 						self.nextFrom = nextFrom
 						self.postData = presentations
 						self.stopRefreshing()
+						self.footerLabel.isHidden = false
+						self.footerLabel.text = FooterPresentation.text(for: presentations.count)
 						self.tableView.reloadData()
 					}
 				}
@@ -137,6 +153,10 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 			self.topBar.alpha = scrollView.contentOffset.y > -44 ? 1 : 0
 		}
 		searchBar.resignFirstResponder()
+		let currentOffset = scrollView.contentOffset.y
+		let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+		let deltaOffset = maximumOffset - currentOffset
+		print(deltaOffset)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

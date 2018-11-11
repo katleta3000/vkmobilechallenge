@@ -99,6 +99,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="footerLabel" destination="WO9-4h-2AP" id="DpI-ud-rpm"/>
+                        <outlet property="footerLoader" destination="6lh-4Y-CRl" id="crV-mw-Av3"/>
+                        <outlet property="footerView" destination="rYl-UP-A9F" id="opX-rc-PIZ"/>
                         <outlet property="headerImageView" destination="1Pu-pO-VUh" id="0VU-zC-d9p"/>
                         <outlet property="headerView" destination="W0y-LN-BNM" id="8QU-qw-DYf"/>
                         <outlet property="searchBar" destination="dh1-xG-DJF" id="X8f-ou-EyQ"/>
@@ -135,6 +138,29 @@
                         <constraint firstItem="1Pu-pO-VUh" firstAttribute="centerY" secondItem="dh1-xG-DJF" secondAttribute="centerY" id="dVa-RN-rFw"/>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="trailing" secondItem="W0y-LN-BNM" secondAttribute="trailing" constant="-60" id="lFd-wL-KR9"/>
                         <constraint firstItem="dh1-xG-DJF" firstAttribute="leading" secondItem="W0y-LN-BNM" secondAttribute="leading" id="q1j-E8-dkR"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" id="rYl-UP-A9F">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WO9-4h-2AP">
+                            <rect key="frame" x="12" y="34" width="351" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6lh-4Y-CRl">
+                            <rect key="frame" x="177.5" y="16" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="6lh-4Y-CRl" firstAttribute="centerX" secondItem="rYl-UP-A9F" secondAttribute="centerX" id="IQ0-z7-Je6"/>
+                        <constraint firstAttribute="bottom" secondItem="WO9-4h-2AP" secondAttribute="bottom" constant="6" id="dfv-Wo-8i4"/>
+                        <constraint firstAttribute="trailing" secondItem="WO9-4h-2AP" secondAttribute="trailing" constant="12" id="kFx-fs-1ff"/>
+                        <constraint firstAttribute="bottom" secondItem="6lh-4Y-CRl" secondAttribute="bottom" constant="4" id="roQ-IJ-xce"/>
+                        <constraint firstItem="WO9-4h-2AP" firstAttribute="leading" secondItem="rYl-UP-A9F" secondAttribute="leading" constant="12" id="tQf-RF-oB6"/>
                     </constraints>
                 </view>
             </objects>

@@ -93,7 +93,7 @@ final class PostTableCell: UITableViewCell {
 		}
 		if reposts == nil {
 			let view = UILabel(frame: CGRect(x: 212, y: 18, width: 55, height: 17))
-			view.backgroundColor = .white
+			view.backgroundColor = .clear
 			view.textColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 1)
 			view.font = UIFont(name: "SFProText-Medium", size: 14)
 			bottomView!.addSubview(view)

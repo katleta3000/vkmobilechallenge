@@ -66,5 +66,4 @@ struct PostPresentation {
 		views = prepareViews()
 		height = 120
 	}
-
 }
