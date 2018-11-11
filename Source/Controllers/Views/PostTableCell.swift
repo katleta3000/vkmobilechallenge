@@ -13,7 +13,7 @@ final class PostTableCell: UITableViewCell {
 	private weak var bottomView: UIView?
 	private weak var viewsImage: UIImageView?
 	private weak var views: UILabel?
-	private weak var textContent: UILabel?
+	private weak var textContentLabel: UILabel?
 	weak var avatar: UIImageView?
 	weak var author: UILabel?
 	weak var date: UILabel?
@@ -26,10 +26,10 @@ final class PostTableCell: UITableViewCell {
 	func setup() {
 		backgroundColor = .clear
 		if containerView == nil {
-			let view = UIView(frame: CGRect(x: 8, y: 6, width: contentView.bounds.size.width - 16, height: contentView.bounds.size.height - 12))
+			let view = UIView(frame: CGRect(x: 8, y: 6, width: bounds.size.width - 16, height: bounds.size.height - 12))
 			view.backgroundColor = .white
 			view.layer.cornerRadius = 10
-			contentView.insertSubview(view, at: 0)
+			addSubview(view)
 			containerView = view
 		}
 		if bottomView == nil {
@@ -78,6 +78,16 @@ final class PostTableCell: UITableViewCell {
 			containerView!.addSubview(view)
 			date = view
 		}
+		if textContentLabel == nil {
+			let label = UILabel(frame: CGRect(x: 12, y: 58, width: containerView!.bounds.size.width - 24, height: 20))
+			// а здесь я словил удивительный баг – если раскомментировать строчку ниже, то у таблицы будет периодически отрисовываться сепаратор
+			// label.backgroundColor = .white
+			label.textColor = UIColor(red: 0.17, green: 0.18, blue: 0.19, alpha: 1)
+			label.font = UIFont(name: "SFProText-Regular", size: 15)
+			label.numberOfLines = 0
+			containerView!.addSubview(label)
+			textContentLabel = label
+		}
 		if likes == nil {
 			let view = UILabel(frame: CGRect(x: 44, y: 18, width: 55, height: 17))
 			view.backgroundColor = .white
@@ -110,15 +120,6 @@ final class PostTableCell: UITableViewCell {
 			bottomView!.addSubview(view)
 			views = view
 		}
-		if textContent == nil {
-			let view = UILabel(frame: CGRect(x: 12, y: 58, width: containerView!.bounds.size.width - 24, height: 0))
-			view.backgroundColor = .white
-			view.textColor = UIColor(red: 0.17, green: 0.18, blue: 0.19, alpha: 1)
-			view.font = UIFont(name: "SFProText-Regular", size: 15)
-			view.numberOfLines = 0
-			containerView!.addSubview(view)
-			textContent = view
-		}
 	}
 	
 	func updateViewsIcon(countString: String) {
@@ -135,19 +136,21 @@ final class PostTableCell: UITableViewCell {
 	}
 	
 	func updateContent(text: NSAttributedString?, textHeight: CGFloat, totalHeight: CGFloat) {
-		
+
 		if var frame = containerView?.frame {
 			frame.size.height = totalHeight - 12
 			containerView?.frame = frame
 		}
-		if var frame = textContent?.frame {
+		
+		if var frame = textContentLabel?.frame {
 			frame.size.height = textHeight
-			textContent?.frame = frame
+			textContentLabel?.frame = frame
 		}
+		
 		if var frame = bottomView?.frame, let containerHeight = containerView?.bounds.size.height {
 			frame.origin.y = containerHeight - bottomViewHeight
 			bottomView?.frame = frame
 		}
-		textContent?.attributedText = text
+		textContentLabel?.attributedText = text
 	}
 }
