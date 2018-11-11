@@ -21,7 +21,9 @@ struct PostPresentation {
 	init(with post: Post) {
 		
 		func prepareAuthor() -> String {
-			if let user = post.user {
+			if let problem = post.user?.problem ?? post.group?.problem {
+				return problem.rawValue
+			} else if let user = post.user {
 				if let firstName = user.firstName, let lastName = user.lastName {
 					return "\(firstName) \(lastName)"
 				} else if let firstName = user.firstName {
@@ -31,6 +33,8 @@ struct PostPresentation {
 				} else {
 					return ""
 				}
+			} else if let group = post.group {
+				return group.name
 			} else {
 				return ""
 			}
@@ -55,7 +59,7 @@ struct PostPresentation {
 		
 		author = prepareAuthor()
 		date = prepareDate()
-		imageUrl = post.user?.photoUrl
+		imageUrl = post.user?.photoUrl ?? post.group?.photoUrl
 		likes = "\(post.likes)"
 		reposts = "\(post.reposts)"
 		comments = "\(post.comments)"

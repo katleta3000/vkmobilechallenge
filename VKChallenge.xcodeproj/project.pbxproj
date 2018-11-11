@@ -29,6 +29,10 @@
 		A8D5282B21976D9500C8E2C6 /* UIImage+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5282A21976D9500C8E2C6 /* UIImage+Round.swift */; };
 		A8D5282F2197771300C8E2C6 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8D5282D2197771300C8E2C6 /* SF-Pro-Text-Regular.otf */; };
 		A8D528302197771300C8E2C6 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A8D5282E2197771300C8E2C6 /* SF-Pro-Text-Medium.otf */; };
+		A8D5283221981F0400C8E2C6 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5283121981F0400C8E2C6 /* Group.swift */; };
+		A8D5283421981F5600C8E2C6 /* Problem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5283321981F5600C8E2C6 /* Problem.swift */; };
+		A8D5283621981FB700C8E2C6 /* PostParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5283521981FB700C8E2C6 /* PostParser.swift */; };
+		A8D5283821981FC100C8E2C6 /* GroupParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D5283721981FC100C8E2C6 /* GroupParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +73,10 @@
 		A8D5282A21976D9500C8E2C6 /* UIImage+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Round.swift"; sourceTree = "<group>"; };
 		A8D5282D2197771300C8E2C6 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		A8D5282E2197771300C8E2C6 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		A8D5283121981F0400C8E2C6 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		A8D5283321981F5600C8E2C6 /* Problem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Problem.swift; sourceTree = "<group>"; };
+		A8D5283521981FB700C8E2C6 /* PostParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostParser.swift; sourceTree = "<group>"; };
+		A8D5283721981FC100C8E2C6 /* GroupParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +166,8 @@
 				A83E811B219640C000E09E55 /* Post.swift */,
 				A83678532196E64800597C16 /* Photo.swift */,
 				A83678552196E64F00597C16 /* Profile.swift */,
+				A8D5283121981F0400C8E2C6 /* Group.swift */,
+				A8D5283321981F5600C8E2C6 /* Problem.swift */,
 			);
 			path = Entitiy;
 			sourceTree = "<group>";
@@ -165,7 +175,7 @@
 		A83E811A219640AA00E09E55 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A8CC0C3D21970D69003C2C52 /* Common */,
+				A8CC0C3D21970D69003C2C52 /* Parsers */,
 				A83E811521962F1D00E09E55 /* NewsfeedService.swift */,
 				A8CC0C3B219709AF003C2C52 /* UserService.swift */,
 				A83E81172196323300E09E55 /* VKService.swift */,
@@ -174,12 +184,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		A8CC0C3D21970D69003C2C52 /* Common */ = {
+		A8CC0C3D21970D69003C2C52 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
 				A8CC0C3E21970D7D003C2C52 /* ProfileParser.swift */,
+				A8D5283721981FC100C8E2C6 /* GroupParser.swift */,
+				A8D5283521981FB700C8E2C6 /* PostParser.swift */,
 			);
-			path = Common;
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		A8CC0C4C219743E8003C2C52 /* Views */ = {
@@ -285,6 +297,9 @@
 				A83678542196E64800597C16 /* Photo.swift in Sources */,
 				A8CC0C512197442F003C2C52 /* PostPresentation.swift in Sources */,
 				A83E811221962C5200E09E55 /* ServiceLocator.swift in Sources */,
+				A8D5283221981F0400C8E2C6 /* Group.swift in Sources */,
+				A8D5283421981F5600C8E2C6 /* Problem.swift in Sources */,
+				A8D5283821981FC100C8E2C6 /* GroupParser.swift in Sources */,
 				A83E811621962F1D00E09E55 /* NewsfeedService.swift in Sources */,
 				A83E81182196323300E09E55 /* VKService.swift in Sources */,
 				A83E80FE2196121A00E09E55 /* AppDelegate.swift in Sources */,
@@ -296,6 +311,7 @@
 				A83E811C219640C000E09E55 /* Post.swift in Sources */,
 				A8CC0C3F21970D7D003C2C52 /* ProfileParser.swift in Sources */,
 				A83E810A219621CA00E09E55 /* StartViewController.swift in Sources */,
+				A8D5283621981FB700C8E2C6 /* PostParser.swift in Sources */,
 				A8CC0C4E21974407003C2C52 /* PostTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,5 +16,6 @@ struct Post {
 	var reposts: UInt = 0
 	var date: Date!
 	var user: Profile?
+	var group: Group?
 	var photos: [Photo] = []
 }

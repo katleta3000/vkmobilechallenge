@@ -30,6 +30,13 @@ final class ProfileParser {
 		if let url = profileJSON["photo_100"] as? String {
 			profile.photoUrl = url
 		}
+		if let deactivated = profileJSON["deactivated"] as? String {
+			if deactivated == "deleted" {
+				profile.problem = .deleted
+			} else if deactivated == "banned" {
+				profile.problem = .banned
+			}
+		}
 		return (profile, nil)
 	}
 }
