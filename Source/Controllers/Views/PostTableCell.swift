@@ -11,6 +11,8 @@ import UIKit
 final class PostTableCell: UITableViewCell {
 	private weak var containerView: UIView?
 	private weak var bottomView: UIView?
+	private weak var viewsImage: UIImageView?
+	private weak var views: UILabel?
 	weak var avatar: UIImageView?
 	weak var author: UILabel?
 	weak var date: UILabel?
@@ -44,6 +46,12 @@ final class PostTableCell: UITableViewCell {
 			let repostsImage = UIImageView(frame: CGRect(x: 184, y: 14, width: 24, height: 24))
 			bottomView!.addSubview(repostsImage)
 			repostsImage.image = UIImage(named: "reposts_icon")
+			
+			let viewsImage = UIImageView(frame: CGRect(x: 184, y: 16, width: 20, height: 20))
+			bottomView!.addSubview(viewsImage)
+			viewsImage.image = UIImage(named: "views_icon")
+			viewsImage.isHidden = true
+			self.viewsImage = viewsImage
 		}
 		if avatar == nil {
 			let view = UIImageView(frame: CGRect(x: 12, y: 12, width: 36, height: 36))
@@ -91,5 +99,26 @@ final class PostTableCell: UITableViewCell {
 			bottomView!.addSubview(view)
 			reposts = view
 		}
+		if views == nil {
+			let view = UILabel(frame: CGRect(x: 212, y: 18, width: 0, height: 0))
+			view.backgroundColor = .white
+			view.textColor = UIColor(red: 0.66, green: 0.68, blue: 0.7, alpha: 1)
+			view.font = UIFont(name: "SFProText-Regular", size: 14)
+			bottomView!.addSubview(view)
+			views = view
+		}
+	}
+	
+	func updateViewsIcon(countString: String) {
+		guard let views = views, let bottomView = bottomView, let viewsImage = viewsImage else { return }
+	
+		views.text = countString
+		views.sizeToFit()
+		views.frame = CGRect(x: bottomView.bounds.size.width - 16 - views.bounds.size.width, y: 18, width: views.bounds.size.width, height: 17)
+		
+		var frame = viewsImage.frame
+		frame.origin.x = views.frame.origin.x - frame.size.width - 2
+		viewsImage.frame = frame
+		viewsImage.isHidden = false
 	}
 }

@@ -42,15 +42,25 @@ struct PostPresentation {
 			return formatter.string(from: post.date)
 		}
 		
+		func prepareViews() -> String {
+			let count = post.views
+			if count < 1000 {
+				return "\(post.views)"
+			} else if count < 10000 {
+				return String(format: "%.1fK", Float(count) / 1000)
+			} else {
+				return String(format: "%.0fK", floorf(Float(count) / 1000))
+			}
+		}
+		
 		author = prepareAuthor()
 		date = prepareDate()
 		imageUrl = post.user?.photoUrl
 		likes = "\(post.likes)"
 		reposts = "\(post.reposts)"
 		comments = "\(post.comments)"
-		views = ""
+		views = prepareViews()
 		height = 120
 	}
-	
-	
+
 }

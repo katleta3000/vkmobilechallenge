@@ -154,6 +154,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.likes?.text = post.likes
 		cell.comments?.text = post.comments
 		cell.reposts?.text = post.reposts
+		cell.updateViewsIcon(countString: post.views)
 		
 		return cell
 	}
