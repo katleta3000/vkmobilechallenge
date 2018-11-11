@@ -10,7 +10,7 @@ import UIKit
 
 final class MyImageView: UIImageView {
 	deinit {
-		print("dealloc")
+//		print("dealloc")
 	}
 }
 
