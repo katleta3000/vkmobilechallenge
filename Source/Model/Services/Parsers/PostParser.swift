@@ -42,6 +42,22 @@ final class PostParser {
 				post.group = group
 			}
 		}
+		var photos = [Photo]()
+		if let attachments = postJson["attachments"] as? [[String: Any]] {
+			for attachment in attachments {
+				if let type = attachment["type"] as? String,
+					type == "photo",
+					let photoJSON = attachment["photo"] as? [String: Any],
+					let sizes = photoJSON["sizes"] as? [[String: Any]] {
+					for sizeItem in sizes {
+						if let type = sizeItem["type"] as? String, type == "r", let url = sizeItem["url"] as? String {
+							photos.append(Photo(url: url))
+						}
+					}
+				}
+			}
+		}
+		post.photos = photos
 		post.text = postJson["text"] as? String
 		return (post, nil)
 	}

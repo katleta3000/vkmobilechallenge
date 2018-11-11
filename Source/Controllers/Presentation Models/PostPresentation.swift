@@ -20,6 +20,7 @@ struct PostPresentation {
 	let comments: String
 	let views: String
 	let text: NSAttributedString?
+	let photos: [Photo]
 	
 	var isCompact = false
 	
@@ -89,8 +90,6 @@ struct PostPresentation {
 			
 			let size = attributedString.boundingRect(with: CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
 			
-			print("text \(attributedString.string) size \(size.height)")
-			
 			self.text = attributedString
 			if size.height >= compactTextLimit {
 				isCompact = true
@@ -101,6 +100,7 @@ struct PostPresentation {
 			textHeight = 0
 		}
 		totalHeight = max(124, 124 + textHeight) // минимум 12 (отступ до аватарки) + 36 (аватарка) + 10 (отступ до текста) + 6 (отступ до нижнего бара) + 48 (нижний бар) + 6 (отсуп самого бабла)
+		photos = post.photos
 	}
 	
 	func compactHeight() -> CGFloat {
