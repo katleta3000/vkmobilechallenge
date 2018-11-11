@@ -25,7 +25,7 @@ final class PostTableCell: UITableViewCell {
 	// TODO синхронизовать константы с PostPresentation – это же так легко, вынести их в отдельную структуру и проще будет и без magic numbers
 	let topOffsetToText: CGFloat = 58
 	let bottomViewHeight: CGFloat = 48
-	let limitHeight: CGFloat = 22
+	let limitHeight: CGFloat = 28
 	
 	func setup() {
 		backgroundColor = .clear
@@ -66,13 +66,12 @@ final class PostTableCell: UITableViewCell {
 			label.textColor = UIColor(red: 0.17, green: 0.18, blue: 0.19, alpha: 1)
 			label.font = UIFont(name: "SFProText-Regular", size: 15)
 			label.numberOfLines = 0
-			label.backgroundColor = .yellow
 			containerView!.addSubview(label)
 			textContentLabel = label
 		}
 		if limitView == nil {
-			let view = UIView(frame: CGRect(x: 12, y: 0, width: containerView!.bounds.size.width - 24, height: 22))
-			view.backgroundColor = .red
+			let view = UIView(frame: CGRect(x: 12, y: 0, width: containerView!.bounds.size.width - 24, height: limitHeight))
+			view.backgroundColor = .white
 			containerView!.addSubview(view)
 			limitView = view
 		}

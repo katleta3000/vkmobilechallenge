@@ -165,7 +165,9 @@ extension NewsViewController {
 		let indexPath = IndexPath(row: sender.tag, section: 0)
 		if let cell = tableView.cellForRow(at: indexPath) as? PostTableCell {
 			tableView.beginUpdates()
-			cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
+			UIView.animate(withDuration: 0.25) {
+				cell.updateContent(text: post.text, textHeight: post.textHeight, totalHeight: post.totalHeight, limited: post.isCompact)
+			}
 			tableView.endUpdates()
 		}
 	}

@@ -104,6 +104,6 @@ struct PostPresentation {
 	}
 	
 	func compactHeight() -> CGFloat {
-		return 124 + compactTextLimit + limitAddHeight
+		return 124 + compactTextHeight + limitAddHeight
 	}
 }
