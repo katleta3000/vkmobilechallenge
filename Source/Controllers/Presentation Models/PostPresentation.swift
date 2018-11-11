@@ -57,7 +57,8 @@ struct PostPresentation {
 		
 		func prepareDate() -> String {
 			let formatter = DateFormatter()
-			formatter.dateFormat = "d MMM в HH:mm"
+			formatter.dateFormat = "d MMMM в HH:mm"
+			formatter.locale = Locale(identifier: "ru")
 			return formatter.string(from: post.date)
 		}
 		
